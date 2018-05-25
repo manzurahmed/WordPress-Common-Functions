@@ -11,7 +11,7 @@ register_nav_menu( 'topmenu', __('Top Menu', 'alpha') );
 <?php
 wp_nav_menu(
     array(
-        'theme_loation' => 'topmenu',
+        'theme_location' => 'topmenu',
         'menu_id' => 'topmenucontainer',
         'menu_class' => 'list-inline text-center'
     )
