@@ -129,3 +129,17 @@ $('.popup').each(function(){
     $(this).attr("href", image);
 });
 ```
+
+# WPTD Class 3.24 Hasin Haider
+* Single page view and Page template
+কোন পেজের জন্য আলাদা টেমপ্লেট ব্যবহার করতে হলে থিমের রুটে একটা নতুন PHP ফাইল বানাতে হবে। মনে করি, About পেজের জন্য নতুন টেমপ্লেট বানালাম about-page-template.php ফাইল।
+এই ফাইলের ভিতরে প্রথমে লিখতে হবে:
+```php
+<?php
+/*
+ * Template Name: About Page Template
+ */
+?>
+```
+
+এরপর page.php ফাইলের কনটেন্ট কপি করে নিয়ে এসে এর মধ্যে প্রয়োজনীয় পরিবর্তন গুলো করে ফেলতে হবে।
