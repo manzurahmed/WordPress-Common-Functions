@@ -22,3 +22,14 @@ wp_nav_menu(
 );
 ?>
 ```
+
+* ফিল্টার দিয়ে প্রয়োজনীয় css যিুক্ত করা
+```php
+// Add a class to menu list item
+function alpha_menu_item_class( $classes, $item )
+{
+	$classes[] = 'list-inline-item';
+	return $classes;
+}
+add_filter( 'nav_menu_css_class', 'alpha_menu_item_class', 10, 2 );
+```
