@@ -1,3 +1,5 @@
+GitHub Markdown syntax: https://help.github.com/articles/basic-writing-and-formatting-syntax/
+
 # WordPress-Common-Functions
 This is a repository of WordPress functions that I encountered during WordPress Theme and Plugin development tutorials
 
@@ -53,8 +55,9 @@ if(is_active_sidebar( 'sidebar-1' ))
 ?>
 ```
 
-# WPTD Class 3.17 Hasin Haider
+# WPTD Class 3.19 Hasin Haider
 পাসওয়ার্ড প্রটেকটেড পোস্ট ম্যানেজ করা
+* Method 1: Write Code in index.php or where necessary
 ```php
 if( !post_password_required() )
 {
@@ -75,4 +78,29 @@ else
 {
     the_excerpt();
 }
+```
+
+* Method 2: Apply filter for the_excerpt in functions.php file
+```php
+function alpha_the_excerpt( $excerpt )
+{
+	if( !post_password_required() )
+	{
+		return $excerpt;
+	}
+	else
+	{
+		echo get_the_password_form();
+	}
+}
+add_filter( "the_excerpt", "alpha_the_excerpt");
+```
+
+* To omit the word "Protected: " from protected article's title, write another filter in functions.php file.
+```php
+function alpha_protected_title_change()
+{
+	return "%s";
+}
+add_filter( 'protected_title_format', "alpha_protected_title_change" );
 ```
