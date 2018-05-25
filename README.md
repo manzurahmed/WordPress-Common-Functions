@@ -120,7 +120,7 @@ wp_enqueue_script( 'alpha-main', get_template_directory_uri() . '/assets/js/main
 wp_enqueue_script( 'alpha-main', get_theme_file_uri('/assets/js/main.js'), null, '0.0.1', true );
 ```
 * Trick
-We can popup the image in big size with jQuery
+We can popup the image in big size with jQuery.
 Put the following code in main.js file in assets/js/main.js file.
 ```jquery
 // This script taken all image's src and put the image URL in the href attr
