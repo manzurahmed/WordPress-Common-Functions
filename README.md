@@ -52,3 +52,27 @@ if(is_active_sidebar( 'sidebar-1' ))
 }
 ?>
 ```
+
+# WPTD Class 3.17 Hasin Haider
+পাসওয়ার্ড প্রটেকটেড পোস্ট ম্যানেজ করা
+```php
+if( !post_password_required() )
+{
+    the_excerpt();
+}
+else
+{
+    echo get_the_password_form();
+}
+```
+অথবা
+```php
+if( post_password_required() )
+{
+    echo "This post is protected!";
+}
+else
+{
+    the_excerpt();
+}
+```
