@@ -104,3 +104,28 @@ function alpha_protected_title_change()
 }
 add_filter( 'protected_title_format', "alpha_protected_title_change" );
 ```
+
+
+# WPTD Class 3.21 Hasin Haider
+* **External** JS File enque from functions.php file
+```php
+wp_enqueue_script( 'featherlight', get_template_directory_uri() . '/assets/js/featherlight.min.js', array('jquery'), '1.7.13', true );
+```
+
+# WPTD Class 3.22 Hasin Haider
+* **Internal** JS File enque from functions.php file
+```php
+wp_enqueue_script( 'alpha-main', get_template_directory_uri() . '/assets/js/main.js', null, '0.0.1', true );
+// OR, the file below can be used, but, get_theme_file_uri() function isn't available before 4.7 version of WordPress
+wp_enqueue_script( 'alpha-main', get_theme_file_uri('/assets/js/main.js'), null, '0.0.1', true );
+```
+* Trick
+We can popup the image in big size with jQuery
+Put the following code in main.js file in assets/js/main.js file.
+```jquery
+// This script taken all image's src and put the image URL in the href attr
+$('.popup').each(function(){
+    var image = $(this).find("img").attr("src");
+    $(this).attr("href", image);
+});
+```
