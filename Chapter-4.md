@@ -11,3 +11,27 @@ Return: (mixed) Will be an array if $single is false. Will be value of meta data
 ```php
 get_post_meta( get_the_ID(), "placeholder", true );
 ```
+
+# Class 4.3
+## ওয়ার্ডপ্রেসে পিএইচপি স্ক্রিপ্ট থেকে জাভাস্ক্রিপ্টের কাছে ডেটা পাঠানো 
+
+functions.php ফাইলে wp_enqueue_scripts হুকের কলব্যাক ফাংশনে নীচের কোড দিয়ে জাভাস্ক্রিপ্ট এর কাছে ভ্যালু পাস করা যায়।
+
+```php
+$launcher_year = get_post_meta( get_the_ID(), 'year', true );
+$launcher_month = get_post_meta( get_the_ID(), 'month', true );
+$launcher_day = get_post_meta( get_the_ID(), 'day', true );
+
+ // wp_localize_script( $handle, $name, $data );
+
+wp_localize_script( 'main-jquery-js', 'datedata',
+  array(
+    "year" => $launcher_year,
+    "month" => $launcher_month,
+    "day" => $launcher_day
+  )
+);
+```
+
+এই ডাটাটা পাস করা হয়েছে main.js ফাইলে। জেএস ফাইলটি datedata নামে একটি অবজেক্ট আকারে ডাটাটা পাবে, যার মধ্যে ৩টি প্রপার্টি থাকবে, year, month, এবং day
+
