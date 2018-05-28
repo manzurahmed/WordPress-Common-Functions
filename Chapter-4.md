@@ -18,7 +18,7 @@ get_post_meta( get_the_ID(), "placeholder", true );
 functions.php ফাইলে wp_enqueue_scripts হুকের কলব্যাক ফাংশনে নীচের কোড দিয়ে জাভাস্ক্রিপ্ট এর কাছে ভ্যালু পাস করা যায়।
 
 ```php
-wp_enqueue_script( 'main-jquery', get_theme_file_uri("/assets/js/main.js"), array('jquery'), null, true );
+wp_enqueue_script( '**main-jquery**', get_theme_file_uri("/assets/js/main.js"), array('jquery'), null, true );
 
 $launcher_year = get_post_meta( get_the_ID(), 'year', true );
 $launcher_month = get_post_meta( get_the_ID(), 'month', true );
@@ -26,7 +26,7 @@ $launcher_day = get_post_meta( get_the_ID(), 'day', true );
 
  // wp_localize_script( $handle, $name, $data );
 
-wp_localize_script( 'main-jquery', 'datedata',
+wp_localize_script( '**main-jquery**', 'datedata',
   array(
     "year" => $launcher_year,
     "month" => $launcher_month,
