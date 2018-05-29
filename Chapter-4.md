@@ -40,3 +40,31 @@ wp_localize_script( '**main-jquery**', 'datedata',
 
 এই ডাটাটা পাস করা হয়েছে main.js ফাইলে। জেএস ফাইলটি datedata নামে একটি অবজেক্ট আকারে ডাটাটা পাবে, যার মধ্যে ৩টি প্রপার্টি থাকবে, year, month, এবং day
 
+# Class 4.4 পেজ টেমপ্লেটে অন-ডিমান্ড অ্যাসেটস (JS/CSS) লোড
+
+একটা ওয়ার্ডপ্রেস সাইটে অনেকগুলো পেজ আছে। সাইটের জন্য অনেক ধরেনর এ্যাসেট লোড করা হয়েছে। ধরেন, একটা পেজে রয়েছে একটি কাউন্টডাউন টাইমের JS এবং CSS। এই জেএস এবং সিএসএস অন্য পেজে লোড করার প্রয়োজন নাই। তখন functions.php ফাইলে after_support_theme হুকের কলব্যাক ফাংশনে চেক করে নিতে হবে, সাইট এখন কোন পেজে আছে। কাউন্টডাউন যুক্ত পেজে আসলে, তখন তার জন্য নির্দিষ্ট যে জেএস এবং সিএসএস লাগবে, তা লোড করে নিতে হবে। অন্য পেজগুলোতে কাউন্টডাউনের জেএস ও সিএসএস লোড করার প্রয়োজন নাই।
+
+```php
+echo get_page_template();
+echo basename( get_page_template() );
+```
+
+Output দেখাবে:
+
+```php
+D:\xampp\htdocs\alpha/wp-content/themes/launcher/test.php
+test.php
+```
+
+```
+$launcher_template_name = basename( get_page_template() );
+if( $launcher_template_name == "launcher.php" )
+{
+ // Load JS for countdown
+ // Load CSS for countdown
+}
+else
+{
+ // Load JS and CSS for other pages
+}
+```
