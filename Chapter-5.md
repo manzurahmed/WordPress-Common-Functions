@@ -61,3 +61,51 @@ echo get_the_author_meta( "display_name" );
 https://developer.wordpress.org/reference/functions/get_the_author_meta/
 https://developer.wordpress.org/reference/functions/get_avatar/
 ```
+
+## ৫.৫ - সাইডবার চেক - কোন উইজেট থাকলে শুধু তখনই সাইডবার দেখানো
+
+সিঙ্গেল পোস্ট পেজে উইজেট থাকা বা না থাকার উপর ভিত্তি করে লেআউট পরিবর্তন করতে হলে, single.php ফাইলে নিচের মত করে লজিক লিখতে হবে:
+
+```php
+<?php
+$alpha_layout_class = "col-md-8";
+$alpha_text_class = '';
+if( !is_active_sidebar( 'sidebar-1') )
+{
+	$alpha_layout_class = "col-md-10 offset-md-1";
+	$alpha_text_class = "text-center";
+}
+?>
+```
+
+এইচটিএমএল এর মধ্যে যে কোড লিখতে হবে:
+
+```php
+<h2 class="post-title <?php echo $alpha_text_class; ?>">
+										<?php the_title(); ?>
+									</h2>
+									<p<?php echo !empty( $alpha_text_class ) ? ' class="' . $alpha_text_class . '"' : ''; ?>>
+										<strong><?php the_author(); ?></strong><br/>
+										<?php echo get_the_date(); ?>
+									</p>
+```
+
+নীচের দিকে যেখানে col-md-4 এর মধ্যে উইজেট দেখানো হচ্ছে, সেখানে লিখতে হবে:
+
+```php
+<?php
+		if( is_active_sidebar( 'sidebar-1') ):
+		?>
+		<div class="col-md-4">
+			<?php
+			if(is_active_sidebar( 'sidebar-1' ))
+			{
+				dynamic_sidebar( 'sidebar-1' );
+			}
+			?>
+		</div>
+		<!--col-md-4-->
+		<?php
+		endif;
+		?>
+```
