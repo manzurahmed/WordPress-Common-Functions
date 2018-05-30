@@ -109,3 +109,39 @@ if( is_active_sidebar( 'sidebar-1') ):
 endif;
 ?>
 ```
+
+## ৫.৫ - বডি ক্লাস এবং পোস্ট ক্লাস নিয়ে বিস্তারিত
+
+body_class ফাংকশন ব্যবহার করলে body ট্যাগ এ ওয়ার্ডপ্রেস বেশ কিছু class যুক্ত করে দেয়। এই ফাংকশন এ কাস্টম ক্লাস যুক্ত করতে হলে, তা ফাংকশনের প্যারামিটার আকারে যুক্ত করা যায়। যেমন:
+
+```php
+<body <?php body_class( array('my-custom-class', 'second-class', 'third-class') ); ?>>
+```
+
+**গুরুত্বপূর্ণ**
+
+ওয়ার্ডপ্রেস যে সমস্ত ক্লাসগুলো body_class বা post_class এর মাধ্যমে এ্যাড করে, তার মধ্যে থেকে এক বা একাধিক ক্লাস বাদ দিতে চাইলে functions.php ফাইলে বডি ক্লাস ও পোস্ট ক্লাসের জন্য প্রয়োজনমত add_filter করতে হবে। নিচে কোড স্যাম্পল দেয়া হল:
+
+```php
+function alpha_body_class( $classes )
+{
+	unset( $classes[array_search( "custom_background", $classes )]);
+	unset( $classes[array_search( "admin-bar", $classes )]);
+	unset( $classes[array_search( "single-format-standard", $classes )]);
+
+	// Video 5.6
+	// We can also add my "custom classes" here
+	//$classes[] = 'yet-another-class';
+
+	return $classes;
+}
+add_filter( "body_class", "alpha_body_class" );
+
+function alpha_post_class( $classes )
+{
+	unset( $classes[array_search( "format-standard", $classes )]);
+	unset( $classes[array_search( "status-publish", $classes )]);
+	return $classes;
+}
+add_filter( "post_class", "alpha_post_class" );
+```
