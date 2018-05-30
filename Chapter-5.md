@@ -82,30 +82,30 @@ if( !is_active_sidebar( 'sidebar-1') )
 
 ```php
 <h2 class="post-title <?php echo $alpha_text_class; ?>">
-										<?php the_title(); ?>
-									</h2>
-									<p<?php echo !empty( $alpha_text_class ) ? ' class="' . $alpha_text_class . '"' : ''; ?>>
-										<strong><?php the_author(); ?></strong><br/>
-										<?php echo get_the_date(); ?>
-									</p>
+	<?php the_title(); ?>
+</h2>
+<p<?php echo !empty( $alpha_text_class ) ? ' class="' . $alpha_text_class . '"' : ''; ?>>
+	<strong><?php the_author(); ?></strong><br/>
+	<?php echo get_the_date(); ?>
+</p>
 ```
 
 নীচের দিকে যেখানে col-md-4 এর মধ্যে উইজেট দেখানো হচ্ছে, সেখানে লিখতে হবে:
 
 ```php
 <?php
-		if( is_active_sidebar( 'sidebar-1') ):
-		?>
-		<div class="col-md-4">
-			<?php
-			if(is_active_sidebar( 'sidebar-1' ))
-			{
-				dynamic_sidebar( 'sidebar-1' );
-			}
-			?>
-		</div>
-		<!--col-md-4-->
-		<?php
-		endif;
-		?>
+if( is_active_sidebar( 'sidebar-1') ):
+?>
+<div class="col-md-4">
+	<?php
+	if(is_active_sidebar( 'sidebar-1' ))
+	{
+		dynamic_sidebar( 'sidebar-1' );
+	}
+	?>
+</div>
+<!--col-md-4-->
+<?php
+endif;
+?>
 ```
