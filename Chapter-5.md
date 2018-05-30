@@ -32,3 +32,13 @@ wp_enqueue_style( 'dashicons');
 
 Dash Icons URL: https://developer.wordpress.org/resource/dashicons/#phone
 
+## ৫.৩ পোস্ট ফরম্যাট অনুযায়ী টেমপ্লেট পার্টস ইউজ করা
+
+index.php ফাইলে while লুপের মধ্যে পোস্ট ফরম্যাট অনুযায়ী টেমপ্লেট পার্ট ফাইল লোড করা হচ্ছে "post-formats" ফোল্ডার থেকে।
+
+```php
+get_template_part("post-formats/content", get_post_format());
+```
+```html
+<span class="dashicons dashicons-format-quote"></span>
+```
