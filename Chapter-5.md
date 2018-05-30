@@ -42,3 +42,22 @@ get_template_part("post-formats/content", get_post_format());
 ```html
 <span class="dashicons dashicons-format-quote"></span>
 ```
+
+## ৫.৪ - সিঙ্গেল পোস্টে অথর সেকশন দেখানো
+
+পোস্টের অথর বা ইউজারদের প্রোফাইল পিকচার ওয়ার্ডপ্রেস ড্যাসবোর্ড থেকে পরিবর্তন করা যায় না। ওয়ার্ডপ্রেসের একটি সহযোগী ওয়েবসাইট http://en.gravatar.com/ থেকে সাইনআপ করে অথরের প্রোফাইল ইমেজ আপলোড করলে, সেই ইমেজটাই ওয়ার্ডপ্রেসের ইউজার প্রোফাইলে দেখা যায়।
+
+যে কোন অথরের মেটা ইনফরমেশন ফেচ করার জন্য যে ফাংকশনগুলো ব্যবহার করা হয়:
+
+```php
+// Get author "Gravatar" image
+get_avatar( get_the_author_meta( "ID" ), $size = 96, $default = '', $alt = '', $args = null )
+// Get author "Display Name"
+echo get_the_author_meta( "display_name" );
+```
+
+বিস্তারিত জানতে:
+```
+https://developer.wordpress.org/reference/functions/get_the_author_meta/
+https://developer.wordpress.org/reference/functions/get_avatar/
+```
