@@ -146,3 +146,36 @@ $('.popup').each(function(){
 ```
 
 এরপর page.php ফাইলের কনটেন্ট কপি করে নিয়ে এসে পেস্ট করব। এবার এই ফাইলের মধ্যে প্রয়োজনীয় পরিবর্তন গুলো করে ফেলতে হবে।
+
+# ৩.২৭ - কাস্টোমাইজারের সাহায্যে হেডার ইমেজ পরিবর্তন (add_theme_support)
+
+functions.php ফাইলে after_setup_theme হুকের কলব্যাকে custom-header এর জন্য নিচের কোডটি লিখব:
+
+```php
+// Add Custom Header support in the customizer
+add_theme_support( 'custom-header' );
+```
+
+এবার wp_header হুকের কলব্যাকে নিচের মত করে কোড লিখব:
+
+```php
+<?php
+	if( is_front_page() )
+	{
+		if( current_theme_supports( 'custom-header') )
+		{ ?>
+<style>
+	.header {
+		background-image: url(<?php echo header_image(); ?>);
+		background-color: #333;
+		background-position: center;
+		background-size: cover;
+	}
+</style>
+		<?php
+		}
+	}
+	?>
+```
+
+এখানে, প্রথমে চেক করা front page এ আছি কিনা। তারপর .header নামের একটি ক্লাসে ব্যাকগ্রাউন্ড ইমেজ হিসাবে কাস্টম হেডারের ইমেজটা দেখানো হচ্ছে।
