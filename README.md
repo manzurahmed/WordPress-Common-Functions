@@ -160,22 +160,22 @@ add_theme_support( 'custom-header' );
 
 ```php
 <?php
-	if( is_front_page() )
-	{
-		if( current_theme_supports( 'custom-header') )
-		{ ?>
+if( is_front_page() )
+{
+	if( current_theme_supports( 'custom-header') )
+	{ ?>
 <style>
-	.header {
-		background-image: url(<?php echo header_image(); ?>);
-		background-color: #333;
-		background-position: center;
-		background-size: cover;
-	}
+.header {
+	background-image: url(<?php echo header_image(); ?>);
+	background-color: #333;
+	background-position: center;
+	background-size: cover;
+}
 </style>
-		<?php
-		}
+	<?php
 	}
-	?>
+}
+?>
 ```
 
 এখানে, প্রথমে চেক করা front page এ আছি কিনা। তারপর .header নামের একটি ক্লাসে ব্যাকগ্রাউন্ড ইমেজ হিসাবে কাস্টম হেডারের ইমেজটা দেখানো হচ্ছে।
@@ -186,14 +186,14 @@ add_theme_support( 'custom-header' );
 
 ```php
 // Video 3.28
-	$alpha_custom_header_details = array(
-		'header-text' => true,
-		'default-text-color' => '#222',
-	);
+$alpha_custom_header_details = array(
+	'header-text' => true,
+	'default-text-color' => '#222',
+);
 
-	// Video 3.27
-	// Theme-wide Custom Header
-	add_theme_support( 'custom-header', $alpha_custom_header_details );
+// Video 3.27
+// Theme-wide Custom Header
+add_theme_support( 'custom-header', $alpha_custom_header_details );
 ```
 
 এতে কাস্টমাইজারে দুইটা নতুন সেটিং অপশন যুক্ত হয়। একটি Colors, অপরটি Site Identity এর মধ্যে “Display Site Title and Tagline" নামে চেকবক্স।
