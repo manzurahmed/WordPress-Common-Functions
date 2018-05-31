@@ -218,7 +218,7 @@ add_theme_support( 'custom-logo', $alpha_custom_logo_defaults );
 এরপর, যেখানে কাস্টম লোগে দেখাবে (আমার ট্রেনিং থিমে hero.php ফাইলে), সেখানে এসে নীচের কোডগুলো লিখতে হবে। কাস্টম লোগে দেখানোর আগে **current_theme_support** ফাংকশন দিয়ে চেক করে নিচ্ছি যে, থিমে আদৌ custom-logo এর জন্য কোন সাপোর্ট যুক্ত করা আছে কি না।
 
 ```php
-<?php if( current_theme_support( "custom-logo" ) ): ?>
+<?php if( current_theme_supports( "custom-logo" ) ): ?>
 <div class="header-logo text-center">
     <?php the_custom_logo(); ?>
 </div>
