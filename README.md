@@ -3,7 +3,7 @@ GitHub Markdown syntax: https://help.github.com/articles/basic-writing-and-forma
 # WordPress-Common-Functions
 This is a repository of WordPress functions that I encountered during WordPress Theme and Plugin development tutorials
 
-# WPTD Class 3.12 Hasin Haider
+# Class 3.12 সিংগেল পোস্ট ভিউতে কমেন্ট ফর্ম দেখানো
 কোন পোস্টের কমেন্ট এনাবল/ডিজাবল স্টেট ভ্যালু চেক করার পর, কমেন্ট টেমপ্লেট লোড করা আবশ্যক।
 ```php
 if(comments_open()): ?>
@@ -15,20 +15,20 @@ comments_template();
 <?php endif; ?>
 ```
 
-# WPTD Class 3.15 Hasin Haider
+# Class 3.15 get_template_part, include এবং require এর মাঝে পার্থক্য
 get_template_part()
 1. এই ফাংশন সবসময়ই থিমের রুট ফোল্ডার থেকে টেমপ্লেট পার্ট খুঁজে থাকে।
 2. থিমের টেমপ্লেট পার্টগুলোকে সবসময়ই এই ফাংশন দিয়ে লোড করতে হবে।
 3. কিন্তু, ক্লাস ফাইল বা অন্যান্য ফাংশন ফাইলকে include_once বা require_once দিয়ে লোড করতে হবে।
 
-# WPTD Class 3.16 Hasin Haider
+# Class 3.16 সিঙ্গেল পোস্ট ভিউতে পোস্ট নেভিগেশন 
 সিঙ্গেল পোস্ট ভিউতে পোস্ট নেভিগেশন
 ```php
 next_post_link();
 previous_post_link();
 ```
 
-# WPTD Class 3.17 Hasin Haider
+# Class 3.17 উইজেট এরিয়া রেজিস্টার করা এবং সিঙ্গেল পোস্ট ভিউ তে সাইডবার দেখানো 
 উইজেট এরিয়া রেজিস্টার করা এবং সিঙ্গেল পোস্ট ভিউ তে সাইডবার দেখানো
 ```php
 register_sidebar(
@@ -55,7 +55,7 @@ if(is_active_sidebar( 'sidebar-1' ))
 ?>
 ```
 
-# WPTD Class 3.19 Hasin Haider
+# Class 3.19 পাসওয়ার্ড প্রটেকটেড পোস্ট ম্যানেজ করা
 পাসওয়ার্ড প্রটেকটেড পোস্ট ম্যানেজ করা
 * Method 1: Write Code in index.php or where necessary
 ```php
@@ -106,13 +106,13 @@ add_filter( 'protected_title_format', "alpha_protected_title_change" );
 ```
 
 
-# WPTD Class 3.21 Hasin Haider
+# Class 3.21 থিমে এক্সটার্নাল জাভাস্ক্রিপ্ট ফাইল এনকিউ করা এবং লাইটবক্স/পপআপ দেখানো
 * **External** JS File enque from functions.php file
 ```php
 wp_enqueue_script( 'featherlight', get_template_directory_uri() . '/assets/js/featherlight.min.js', array('jquery'), '1.7.13', true );
 ```
 
-# WPTD Class 3.22 Hasin Haider
+# Class 3.22 ইনটার্নাল জাভাস্ক্রিপ্ট ফাইল এনকিউ করা এবং ডিপেন্ডেন্সি নিয়ে আলোচনা
 * **Internal** JS File enque from functions.php file
 ```php
 wp_enqueue_script( 'alpha-main', get_template_directory_uri() . '/assets/js/main.js', null, '0.0.1', true );
@@ -130,7 +130,7 @@ $('.popup').each(function(){
 });
 ```
 
-# WPTD Class 3.24 Hasin Haider
+# Class 3.24 সিঙ্গেল পেজ ভিউ এবং পেজ টেমপ্লেটের সাথে পরিচয় (খুবই ইম্পর্ট্যান্ট)
 
 * Single page view and Page template
 
@@ -224,4 +224,5 @@ add_theme_support( 'custom-logo', $alpha_custom_logo_defaults );
 </div>
 <?php endif; ?>
 ```
+
 
