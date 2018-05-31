@@ -179,3 +179,25 @@ add_theme_support( 'custom-header' );
 ```
 
 এখানে, প্রথমে চেক করা front page এ আছি কিনা। তারপর .header নামের একটি ক্লাসে ব্যাকগ্রাউন্ড ইমেজ হিসাবে কাস্টম হেডারের ইমেজটা দেখানো হচ্ছে।
+
+# ৩.২৮ - কাস্টোমাইজারে কাস্টম হেডার টেক্সট কালার পরিবর্তন
+
+যখন থিমে custom-header সাপোর্ট নেয়া হয়, তখন একটি এ্যারে আর্গুমেন্ট পাস করা যায়।
+
+```php
+// Video 3.28
+	$alpha_custom_header_details = array(
+		'header-text' => true,
+		'default-text-color' => '#222',
+	);
+
+	// Video 3.27
+	// Theme-wide Custom Header
+	add_theme_support( 'custom-header', $alpha_custom_header_details );
+```
+
+এতে কাস্টমাইজারে দুইটা নতুন সেটিং অপশন যুক্ত হয়। একটি Colors, অপরটি Site Identity এর মধ্যে “Display Site Title and Tagline" নামে চেকবক্স।
+
+আর্গুমেন্টে header-text কে false করলে, এই চেকবক্সটা চলে যায়।
+
+এরপর wp_head হুকের কলব্যাক ফাংকশনে প্রয়োজনীয় চেকআপ ও সিএসএস যুক্ত করে নিতে হয়।
