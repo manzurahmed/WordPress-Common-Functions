@@ -201,3 +201,27 @@ add_theme_support( 'custom-header', $alpha_custom_header_details );
 আর্গুমেন্টে header-text কে false করলে, এই চেকবক্সটা চলে যায়।
 
 এরপর wp_head হুকের কলব্যাক ফাংকশনে প্রয়োজনীয় চেকআপ ও সিএসএস যুক্ত করে নিতে হয়।
+
+# ৩.২৯ - থিম সাপোর্টে কাস্টম লোগোর ব্যবহার
+
+থিমে custom-logo এর সাপোর্ট যুক্ত করতে হলে after_setup_theme হুকের কলব্যাক ফাংকশনে নীচের কোড লিখতে হবে:
+
+```php
+// Custom Logo Support in the Theme
+$alpha_custom_logo_defaults = array(
+	"width" => "100",
+	"height" => "100",
+);
+add_theme_support( 'custom-logo', $alpha_custom_logo_defaults );
+```
+
+এরপর, যেখানে কাস্টম লোগে দেখাবে (আমার ট্রেনিং থিমে hero.php ফাইলে), সেখানে এসে নীচের কোডগুলো লিখতে হবে। কাস্টম লোগে দেখানোর আগে **current_theme_support** ফাংকশন দিয়ে চেক করে নিচ্ছি যে, থিমে আদৌ custom-logo এর জন্য কোন সাপোর্ট যুক্ত করা আছে কি না।
+
+```php
+<?php if( current_theme_support( "custom-logo" ) ): ?>
+<div class="header-logo text-center">
+    <?php the_custom_logo(); ?>
+</div>
+<?php endif; ?>
+```
+
