@@ -33,10 +33,12 @@ add_image_size( "alpha-square", 400, 400, true );
 
 থিমের ভিতরে নতুন যুক্ত করা ইমেজকে কল করতে হবে ঐ নামে, যে নাম দিয়ে তাদেরকে তৈরী করা হয়েছে।
 
+```php
 the_post_thumbnail( 'alpha-square' );
 the_post_thumbnail( 'alpha-portrait' );
 the_post_thumbnail( 'alpha-landscape' );
 the_post_thumbnail( 'alpha-landscape-hard-cropped' );
+```
 
 ### ৬.৪ - ডিফল্ট ইমেজ সাইজগুলো কখনোই পরিবর্তন করা উচিত নয়
 
