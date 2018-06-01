@@ -37,3 +37,7 @@ the_post_thumbnail( 'alpha-square' );
 the_post_thumbnail( 'alpha-portrait' );
 the_post_thumbnail( 'alpha-landscape' );
 the_post_thumbnail( 'alpha-landscape-hard-cropped' );
+
+### ৬.৪ - ডিফল্ট ইমেজ সাইজগুলো কখনোই পরিবর্তন করা উচিত নয়
+
+ওয়ার্ডপ্রেস থিমের ডিফল্ট ইমেজ সাইজগুলোকে কখনই পরিবর্তন করা উচিত নয়।
