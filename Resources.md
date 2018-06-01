@@ -5,3 +5,4 @@
 
 ### WordPress
 1. https://developer.wordpress.org/resource/dashicons/
+2. Regenerate Thumbnail Plugin
