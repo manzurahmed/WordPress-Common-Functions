@@ -224,5 +224,17 @@ add_theme_support( 'custom-logo', $alpha_custom_logo_defaults );
 </div>
 <?php endif; ?>
 ```
+## ৩.৩০ - কাস্টম হেডার ইমেজে ক্রপিং নিয়ে বিস্তারিত
 
+custom-header হুকের সাথে যে আর্গুমেন্ট পাস করা হয়, তার ৪টা প্যারামিটারে হেডার ইমেজের heigt, width, flex-height এবং flex-width প্যারামিটারগুলো পাস করা যায়। flex-height এবং flex-width দিয়ে বুঝানো হচ্ছে যে,ইমেজের নির্ধারিত উচ্চতা ও প্রস্থ ছাড়াও ক্রপ করার সময় ইচ্ছামত উচ্চতা ও প্রস্থ সেট করা যায়।
 
+```php
+$alpha_custom_header_details = array(
+	'header-text' => true,
+	'default-text-color' => '#222',
+	'width' => 1200,
+	'height' => 600,
+	'flex-height' => true,
+	'flex-width' => true
+);
+```
