@@ -238,3 +238,11 @@ $alpha_custom_header_details = array(
 	'flex-width' => true
 );
 ```
+
+## ৩.৩১ - কাস্টম ব্যাকগ্রাউন্ড
+
+custom-background সাপোর্ট নিলে ২টা সুবিধা যুক্ত হয়।
+
+1. কাস্টমাইজার সেকশনে “Background Image" নামে নতুন ফিচার যুক্ত হবে।
+2. Colors এর মধ্যে "Background Color" সেট করার অপশন যুক্ত হবে।
+
