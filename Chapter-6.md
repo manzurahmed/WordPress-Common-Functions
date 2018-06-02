@@ -58,3 +58,36 @@ add_image_size( "alpha-landscape-hard-cropped", 600, 400, array( "left", "top" )
 ওয়ার্ডপ্রেস **ইমেজের সাইজের** উপরে কাজ করে। যেমন: 400 x 400
 
 ইমেজ সাইজের **হ্যান্ডলের নামের** উপরে নয় যেমন: ("alpha-landscape-hard-cropped")।
+
+### ৬.৬ - ইমেজ সাইজ এবং ক্রপিং এর একটা খুবই ইন্টারেস্টিং প্রবলেম
+
+ভিন্ন ভিন্ন সাইজের ইমেজের জন্য ভিন্ন ভিন্ন ক্রপিং পজিশন বলে দিলাম। কিন্তু, single.php টেমপ্লেটে যখন ভিন্ন ভিন্ন সাইজের ইমেজ দেখাতে যাব, তখন দেখা যায়, শেষের যে ইমেজ সাইজ আছে তার ক্রপিং পজিশন অনুযায়ী ইমেজ দেখায়। এক্ষেত্রে ওয়ার্ডপ্রেস html কোডে **srcset** ব্যবহার করে ইমেজকে রেসপনসিভ করার চেষ্টা করে।
+
+```php
+add_image_size( 'alpha-square', 400, 400, true ); // center center
+add_image_size( 'alpha-square-new1', 401, 401, array('left', 'top') ); // center center
+add_image_size( 'alpha-square-new2', 500, 500, array('center', 'center') );
+add_image_size( 'alpha-square-new2', 600, 600, array('right', 'center') );
+```
+
+**নোট:** নতুন ইমেজ সাইজ ব্যবহার করার পর Regenerate Thumbnail প্লাগইন দিয়ে ইমেজগুলোকে রিজেনারেট করে নিতে হবে। এটা খুবই রিসোর্স ইনটেনসিভ প্রসেস। সুতরাং, ব্যবহার করার আগে চিন্তাভাবনা করে ব্যবহার করতে হবে।
+
+```php
+the_post_thumbnail( 'alpha-square-new1' );
+the_post_thumbnail( 'alpha-square-new2' );
+the_post_thumbnail( 'alpha-square-new3' );
+```
+
+এই ঝামেলা থেকে বাঁচতে wp_calculate_image_srcset হুক ব্যবহার করতে হবে।
+
+```php
+function alpha_image_srcset()
+{
+	return null;
+}
+
+add_filter( 'wp_calculate_image_srcset', 'alpha_image_srcset' );
+// ওয়ার্ডপ্রেসে "return null" ভ্যালু রিটার্ন করার জন্য আলাদা ইনলাইন ফাংশন আছে, "__return_null"।
+// যেখানে null ভ্যালু return করার কথা, সেখানে কলব্যাক ফাংশন ব্যবহার না করে কলব্যাকের জায়গায় "__return_null" ব্যবহার করা যায়।
+//add_filter( 'wp_calculate_image_srcset', '__return_null' );
+```
