@@ -158,3 +158,26 @@ index.php ফাইলকে রিনেম করে category.php এবং ta
 single_cat_title()
 single_tag_title()
 ```
+
+### ৫.৮ - ডে, মান্থ এবং ইয়ারলি আর্কাইভ
+
+tag.php ফাইলকে কপি করে date.php নামে রিনেম করে নিই।
+
+সন, মাস ও তারিখের টাইটেলের জন্য ওয়ার্ডপ্রেসের ফাংকশন ব্যবহার করে নিরূপণ করে নিতে হবে আমি date এর কোন অবস্থানে রয়েছি, সন এর আর্কাইভে, নাকি, মাসের, নামি, তারিখের আর্কাইভে। if কন্ডিশন দিয়ে এটা করা হয়েছে। কোড নিম্নরূপ:
+
+```php
+if( is_month() )
+{
+    $month = get_query_var( 'monthnum' );
+    $dateobj = DateTime::createFromFormat( '!m', $month );
+    echo $dateobj->format("F");
+}
+else if( is_year() )
+{
+    echo get_query_var( 'year' );
+}
+else if ( is_day() )
+{
+    printf("%s/%s/%s", get_query_var('day'), get_query_var('monthnum'), get_query_var('year'));
+}
+```
