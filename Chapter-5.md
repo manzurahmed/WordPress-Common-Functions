@@ -181,3 +181,16 @@ else if ( is_day() )
     printf("%s/%s/%s", get_query_var('day'), get_query_var('monthnum'), get_query_var('year'));
 }
 ```
+
+### ৫.৯ - get_query_var কে এসকেপ করা
+
+ইউজারের কাছে থেকে যত ধরণের ইনপুট আসবে, সব esc_html বা esc_attr দিয়ে এসকেপ করে নিতে হবে। যেমনঃ
+
+```php
+$year = esc_html( get_query_var('day) );
+```
+
+### ৫.১০ - অথর পেজ - এবং অথর টেমপ্লেট হায়ারার্কি
+
+অথর এর নাম পেতে **the_author_posts_link()** ফাংকশন ব্যবহার করব। 
+অথর এর আইডি বা নাইসনেম দিয়ে যেমনঃ author-1.php বা author-admin.php তৈরী করে অথর পেজের জন্য আলাদা লুক বা ফিল তৈরী করা যায়।
