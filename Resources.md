@@ -12,6 +12,7 @@
 1. Regenerate Thumbnail Plugin
 2. FakerPress
 
-### Design Resources
+### Other Resources
 
 1. https://www.toptal.com/designers/subtlepatterns/
+2. List of HTTP status codes: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
