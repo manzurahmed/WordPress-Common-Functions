@@ -11,6 +11,7 @@
 
 1. Regenerate Thumbnail Plugin
 2. FakerPress
+3. Attachments: https://wordpress.org/plugins/attachments/
 
 ### Other Resources
 
