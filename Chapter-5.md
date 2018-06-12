@@ -272,3 +272,51 @@ var slider = tns({
     autoplayButtonOutput: false,
 });
 ```
+
+### ৫.১২ - অ্যাটাচমেন্টস প্লাগইন এর সাহায্যে টেস্টিমোনিয়াল সেকশন তৈরী করা
+
+ক্লাস ৫.১১ এ TinySlider স্ক্রিপ্ট দিয়ে পোস্টের জন্য যে স্লাইডার বানানো হয়েছিল, ঠিক একইভাবে About পেজে টেস্টিমোনিয়াল স্লাইডার বানানো হয়েছে।
+About পেজের জন্য আলাদা পেজ টেমপ্লেট বানানো আছে।
+lib/attachments.php ফাইলে Page এর জন্য আলাদা করে Testimonial বানানোর জন্য হুক ও কলব্যাক ফাংশন ব্যবহার করা হয়েছে।
+
+```php
+
+function alpha_testimonial_attachments( $attachments )
+{
+	$fields = array(
+		array(
+			'name'		=> 'name',
+			'type'		=> 'text',
+			'label'		=> __( 'Name', 'alpha' )
+		),
+		array(
+			'name'		=> 'position',
+			'type'		=> 'text',
+			'label'		=> __( 'Position', 'alpha' )
+		),
+		array(
+			'name'		=> 'company',
+			'type'		=> 'text',
+			'label'		=> __( 'Company', 'alpha' )
+		),
+		array(
+			'name'		=> 'testimonial',
+			'type'		=> 'textarea',
+			'label'		=> __( 'Testimonial', 'alpha' )
+		),
+	);
+
+	$args = array(
+		'label'				=> 'Testimonials',
+		'post_type'			=> array( 'page' ),
+		'filetype'			=> array( 'image' ),
+		'note'				=> 'Add Testimonial',
+		'button_text'		=> __( 'Attach Files', 'alpha' ),
+		'fields'			=> $fields,
+	);
+
+	$attachments->register( 'testimonials', $args );
+}
+add_action( 'attachments_register', 'alpha_testimonial_attachments' );
+
+```
