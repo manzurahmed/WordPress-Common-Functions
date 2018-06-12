@@ -11,7 +11,9 @@
 
 1. Regenerate Thumbnail Plugin
 2. FakerPress
-3. Attachments: https://wordpress.org/plugins/attachments/
+3. Attachments:
+    https://wordpress.org/plugins/attachments/
+    https://github.com/jchristopher/attachments/blob/master/docs/usage.md
 
 ### Other Resources
 
@@ -19,4 +21,5 @@
 2. List of HTTP status codes: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 
 ### jQuery Plugin Resources
-1. Tiny Slider: https://github.com/ganlanyuan/tiny-slider
+1. FeatherLight Popup: https://noelboss.github.io/featherlight/
+2. Tiny Slider: https://github.com/ganlanyuan/tiny-slider
