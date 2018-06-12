@@ -194,3 +194,81 @@ $year = esc_html( get_query_var('day) );
 
 অথর এর নাম পেতে **the_author_posts_link()** ফাংকশন ব্যবহার করব। 
 অথর এর আইডি বা নাইসনেম দিয়ে যেমনঃ author-1.php বা author-admin.php তৈরী করে অথর পেজের জন্য আলাদা লুক বা ফিল তৈরী করা যায়।
+
+### ৫.১১ - অ্যাটাচমেন্টস প্লাগইনের সাথে পরিচয় এবং এর সাহায্যে চমৎকার একটা স্লাইডার তৈরী করা
+
+Attachments নামে একটা নতুন প্লাগইন ইন্সটল করলে পোস্ট ও পেজে এক বা একাধিক ইমেজকে প্রতিটি পোস্ট বা পেজের সাথে এটাচ বা যুক্ত করা যায়। বাই ডিফল্ট পোস্ট ও পেজে ছবি এটাচ করার অপশন চলে আসে। এছাড়াও ওয়ার্ডপ্রেসে এটাচমেন্টে একটা menu item যুক্ত হয়। এই ডিফল্ট বিহ্যাভিওর পরিবর্তন করা যায়।
+
+এর জন্য প্রথমে থিমে lib নামে একটু ফোল্ডার তৈরী করে তার মধ্যে attachments.php ফাইল তৈরী করার পর ২টা define ভ্যালুর মান পরিবর্তন করে দিতে হবে।
+
+```php
+define( 'ATTACHMENTS_SETTINGS_SCREEN', false );
+add_filter( 'attachments_default_instance', '__return_false' );
+```
+
+এবার এই attachments.php কে functions.php ফাইলে ইনক্লুড করে দিতে হবে।
+
+এছাড়াও, এ্যাটাচমেন্টের জন্য টাইটেল ও ক্যাপশন ফিল্ড থাকে। ক্লাসের টিউটোরিয়ালে শুধু টাইটেল রেখে ক্যাপশনকে বাদ দেয়া হয়েছে। এর জন্য নিচের কোড লিখতে হবে:
+
+```php
+function alpha_attachments( $attachments )
+{
+	$fields = array(
+		array(
+			'name'		=> 'title',
+			'type'		=> 'text',
+			'label'		=> __( 'Title', 'alpha' )
+		),
+	);
+
+	$args = array(
+		'label'				=> 'Featured Slider',
+		'post_type'			=> array( 'post' ),
+		'filetype'			=> array( 'image' ),
+		'note'				=> 'Add Slider Images',
+		'button_text'		=> __( 'Attach Files', 'alpha' ),
+		'fields'			=> $fields,
+	);
+
+	$attachments->register( 'slider', $args );
+}
+add_action( 'attachments_register', 'alpha_attachments' );
+```
+
+এই কোডগুলো প্লাগইনের নিজস্ব ডকুমেন্টেশন পেজে পাওয়া যাবে।
+
+বিস্তারিত:
+https://github.com/jchristopher/attachments/blob/master/docs/usage.md
+
+যে কোন পোস্টে ৪/৫ টা ইমেজ এ্যাটাচ করে পোস্ট আপডেট করে নিব। এই ইমেজগুলোকে স্লাইডার আকারে পোস্টে দেখানোর জন্য TinySlider নামের একটি স্ক্রিপ্ট ব্যবহার করা হবে। single.php ফাইলে স্লাইডারের HTML মার্ক ও কিভাবে ইন্সটানশিয়েট করতে হবে, তা নীচে দেয়া হল:
+
+```php
+if( class_exists('Attachments') )
+{
+	$attachments = new Attachments( 'slider' );
+	if( $attachments->exist())
+	{
+		while( $attachment = $attachments->get() )
+		{ ?>
+			<div>
+				<?php echo $attachments->image( 'large' ); ?>
+			</div>
+		<?php
+		}
+	}
+}
+```
+
+```js
+var slider = tns({
+    container: '.slider',
+    speed: 300,
+    autoplayTimeout: 3000,
+    items: 1,
+    autoplay: true,
+    autoHeight: true,
+    controls: false,
+    nav: false,
+    autoplayButtonOutput: false,
+});
+```
