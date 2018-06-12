@@ -17,3 +17,6 @@
 
 1. https://www.toptal.com/designers/subtlepatterns/
 2. List of HTTP status codes: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+
+### jQuery Plugin Resources
+1. Tiny Slider: https://github.com/ganlanyuan/tiny-slider
