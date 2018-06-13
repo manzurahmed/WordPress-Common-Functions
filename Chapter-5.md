@@ -325,3 +325,45 @@ add_action( 'attachments_register', 'alpha_testimonial_attachments' );
 
 ৫.১২ ক্লাসের টেস্টিমোনিয়ালের মতই টিম সেকশন তৈরী করা হয়েছে।
 
+### ৫.১৪ - এক পেজের অ্যাটাচমেন্টস প্লাগইনের ইনফরমেশন কিভাবে অন্য পেজে নিব
+
+এটাচমেন্ট প্লাগইনের ইন্সটানশিয়েট করার জন্য আর্গুমেন্ট আকারে যে পেজে এ্যাটাচমেন্ট আছে সেই পেজের আইডিকে পাস করা হয়। নিচের কোড স্যাম্পল দ্রস্টব্য।
+
+```
+<?php /* ************** TESTIMONIALS *************** */ ?>
+<?php
+// Video 5.14
+$attachments = new Attachments( 'testimonials', 2 );
+if( class_exists('Attachments') && $attachments->exist() ):
+?>
+<h2 class="text-center">
+    <?php _e( 'Testimonials', 'alpha' ); ?>
+</h2>
+<?php endif; ?>
+
+<div class="testimonials slider text-center">
+<?php
+if( class_exists('Attachments') )
+{
+    if( $attachments->exist())
+    {
+	while( $attachment = $attachments->get() )
+	{ ?>
+	    <div>
+		<?php echo $attachments->image( 'thumbnail' ); ?>
+		<h4><?php echo esc_html($attachments->field( 'name' )); ?></h4>
+		<p><?php echo esc_html($attachments->field( 'testimonial' )); ?></p>
+		<p>
+		    <?php echo esc_html($attachments->field( 'position' )); ?>
+		    <strong>
+		    <?php echo esc_html($attachments->field( 'company' )); ?>
+		    </strong>
+		</p>
+	    </div>
+	<?php
+	}
+    }
+}
+?>
+</div>
+```
