@@ -320,3 +320,8 @@ function alpha_testimonial_attachments( $attachments )
 add_action( 'attachments_register', 'alpha_testimonial_attachments' );
 
 ```
+
+### ৫.১৩ - অ্যাটাচমেন্টস প্লাগইন এর সাহায্যে টিম মেম্বার সেকশন তৈরী করা
+
+৫.১২ ক্লাসের টেস্টিমোনিয়ালের মতই টিম সেকশন তৈরী করা হয়েছে।
+
