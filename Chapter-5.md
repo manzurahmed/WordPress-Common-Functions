@@ -379,3 +379,30 @@ echo get_search_form();
 // OR
 get_search_form(true);
 ```
+
+### ৫.১৬ - সার্চ ফর্মের কোড পরিবর্তন করা
+
+get_search_form ফাংশনটি থিমের **searchform.php** নামের ফাইল থেকে সার্চ ফর্ম দেখাবে। যদি এ রকম ফাইল না থাকে, তবে **ডিফল্ট** সার্চ ফর্ম দেখাবে।
+
+সার্চের HTML5 কমপ্লায়েন্ট মার্কআপ পেতে functions.php ফাইলে থিমের জন্য html5 সাপোর্ট নিতে হবে। সেজন্য নিচের কোড লিখতে হবে:
+
+```
+function wpdocs_after_setup_theme() {
+    add_theme_support( 'html5', array( 'search-form' ) );
+}
+```
+এরপর ‍searchform.php ফাইলে সার্চ ফর্মের মার্কআপ লিখব। নীচে একটি মার্কআপ দেয়া হয়েছে। তবে, এই মার্কআপ নিজের প্রয়োজনমত পরিবর্তন করে নেয়া যাবে।
+
+```html
+<form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
+    <label>
+        <span class="screen-reader-text"><?php echo _x( 'What do you want to search:', 'alpha' ) ?></span>
+        <input type="search" class="search-field"
+            placeholder="<?php echo esc_attr_x( 'Search …', 'placeholder' ) ?>"
+            value="<?php echo get_search_query() ?>" name="s"
+            title="<?php echo esc_attr_x( 'Search for:', 'alpha' ) ?>" />
+    </label>
+    <input type="submit" class="search-submit"
+        value="<?php echo esc_attr_x( 'Search', 'submit button' ) ?>" />
+</form>
+```
