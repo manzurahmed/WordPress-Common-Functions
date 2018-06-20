@@ -406,3 +406,34 @@ function wpdocs_after_setup_theme() {
         value="<?php echo esc_attr_x( 'Search', 'submit button' ) ?>" />
 </form>
 ```
+
+### ৫.১৭ - সার্চ রেজাল্ট কে হাইলাইট করা
+
+সার্চ ফর্ম দিয়ে যখন এক বা একাধিক শব্দ দিয়ে সার্চ করা হয়, তখন সার্চের সেই শব্দ বা শব্দাবলী টাইটেল, এক্সার্পট বা বডি টেক্সের মধ্যে থাকতে পারে। এই শব্দগুলোকে আমরা অন্য ডিস্টিংক্ট কালার দিয়ে দেখাবে। এর জন্য, the_title, the_excerpt, এবং the_content, এই ৩টি হুকের উপরে আমরা filter ব্যবহার করে আউটপুটকে পরিবর্তন করে দিব।
+
+নীচে কোড স্যাম্পল দেয়া হল।
+
+```php
+function alpha_highlight_search_results( $text )
+{
+	if( is_search() )
+	{
+		// the regex pattern is: /(hello|world)/i
+		$pattern = '/('. join('|', explode(' ', get_search_query() ) ) . ')/i';
+		$text = preg_replace( $pattern, '<span class="search-highlight">\0</span>', $text );
+	}
+	return $text;
+}
+add_filter( 'the_content', 'alpha_highlight_search_results' );
+add_filter( 'the_excerpt', 'alpha_highlight_search_results' );
+add_filter( 'the_title', 'alpha_highlight_search_results' );
+```
+
+সিএসএস ফাইলে .search-highlight ক্লাসটিকে ইচ্ছামত স্টাইল করে নিতে হবে:
+
+```css
+.search-highlight {
+    color: yellow;
+    font-weight: bold;
+}
+```
