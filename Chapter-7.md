@@ -59,3 +59,7 @@ if( !function_exists('alpha_about_page_template_banner') )
 	}
 }
 ```
+
+### ৭.৫ - চাইল্ড থিমের অ্যাসেট ম্যানেজমেন্ট - ডিকিউ এবং ডিরেজিস্টার - খুবই ইম্পর্ট্যান্ট
+
+https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap-grid.css
