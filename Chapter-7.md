@@ -62,4 +62,33 @@ if( !function_exists('alpha_about_page_template_banner') )
 
 ### ৭.৫ - চাইল্ড থিমের অ্যাসেট ম্যানেজমেন্ট - ডিকিউ এবং ডিরেজিস্টার - খুবই ইম্পর্ট্যান্ট
 
-https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap-grid.css
+একটি থিমে যখন কোন সিএসএস বা জেএস enqueue করা হয়, তখন যে নাম বা আইডেনটিফায়ার দিয়ে এনকিউ করা হয়, তা ওয়ার্ডপ্রেসের একটি এ্যাসেট হয়ে যায়, বা মনে রাখে।
+চাইল্ড থিমে শুধু dequeue করাটাই যথেষ্ট নয়, করলেও ঐ আইডেনটিফায়ারটি এ্যাসেট থেকে মুছে যায় না।
+একে অবশ্যই  deregister করতে হবে।
+এরপর, enqueue করতে হবে।
+
+নীচে কোড স্যাম্পল দেয়া হল:
+
+```php
+function alpha_child_assets_dequeue()
+{
+    wp_dequeue_style( 'alpha-style' );
+    wp_deregister_style( 'alpha-style' );
+    wp_enqueue_style( 'alpha-style', get_theme_file_uri('/assets/css/alpha.css') );
+}
+add_action( 'wp_enqueue_scripts', 'alpha_child_assets_dequeue', 14 );
+```
+
+প্যারেন্ট থিমে bootstrap সিএসএসকে এনকিউ করলে, তা ওয়ার্ডপ্রেসের নিজস্ব লাইব্রেরী থেকে বুটস্ট্যাপের সিএসএস বা জেএস কে লোড করে। যদি চাইল্ড থিমে কোন সিডিএন থেকে বা অন্য কোন সোর্স থেকে বুটস্ট্যাট সিএসএস ও জেএসকে লোড করার প্রয়োজন হয়, তবে তা নিচের মত করে লোড করতে হয়:
+
+```php
+function alpha_child_bootstrap_ed()
+{
+    wp_dequeue_style( 'bootstrap' );
+    wp_deregister_style( 'bootstrap' );
+    wp_enqueue_style( 'bootstrap', '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css' );
+}
+add_action( 'wp_enqueue_scripts', 'alpha_child_bootstrap_ed', 11 );
+```
+
+লক্ষ্য করি, wp_enqueue_scripts হুকে প্রায়োরিটি ব্যবহার করা হয়েছে। এনকিউ করা সিএসএস বা জেএস গুলো প্রায়োরিটি অনুযায়ী একের পর এক করে লোড হয়। কোন এ্যাসেটকে আগে বা পরে লোড করতে হলে, এই প্রায়োরিটি নাম্বারকে বেশি বা কম করে নিতে হবে।
