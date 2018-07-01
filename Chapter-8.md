@@ -7,3 +7,19 @@
 https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/comments/
 
 থিমের রুটে comments.php ফাইল তৈরী করে নিতে হবে।
+
+### ৮.২ - কমেন্ট টেমপ্লেটে কিভাবে কমেন্ট ডিসপ্লে করতে হয়
+
+কোন পোস্টের কমেন্টগুলো থ্রেডেড থাকুক বা না থাকুক, wp_list_comments() ফাংশন ব্যবহার করে কমেন্টগুলো দেখানো উচিত। এতে ওয়ার্ডপ্রেস প্রিসেট টেমপ্লেটের মাধ্যমে থ্রেডের বা নন-থ্রেডের কমেন্টগুলো দেখায়।
+
+৮.২ ভিডিওতে কমেন্ট ওয়াকারের মাধ্যমে কমেন্ট প্রদর্শন দেখানো হয়েছে।
+
+যে সমস্ত ফাংশন এই ইপিসোডে দেখানে হয়েছে:
+
+```php
+get_avatar($comment, 64, null, null, array('class' => 'mr-3'));
+comment_author($comment);
+edit_comment_link();
+comment_text($comment);
+comment_form();
+```
