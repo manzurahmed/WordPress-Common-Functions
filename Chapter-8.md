@@ -23,3 +23,19 @@ edit_comment_link();
 comment_text($comment);
 comment_form();
 ```
+
+### ৮.৩ - wp_list_comments ব্যবহার করে কমেন্টের লিস্ট দেখানো এবং পেজিনেশন
+
+wp_list_comments() ফাংশনের মাধ্যমে কমেন্ট দেখানো হলে ওয়ার্ডপ্রেস তার নিজস্ব বিল্টইন টেমপ্লেটের মাধ্যমে কমেন্টগুলো দেখায়। এগুলো সিএসএস দিয়ে ইচ্ছামত স্টাইল করে নেয়া যায়। এই ইপিসোডে যে সমস্ত ফাংশনসমূহ ব্যবহার করা হয়েছে, তা comments.php ফাইলে পাওয়া যাবে।
+
+```php
+get_comments_number() - পোস্টের অধীনে কতগুলো কমেন্ট আছে, তার সংখ্যা দিবে
+wp_list_comments() - এই ফাংশনটি মূলত কমেন্টগুলো থ্রেডেড আকারে দেখায়
+the_comments_pagination( array(
+	'screen_reader_text' => __( 'Comments', 'alpha' ),
+	'prev_text' => '<' . __( 'Previous Comments', 'alpha' ),
+	'next_text' => '>' . __( 'Next Comments', 'alpha' ),
+)) - এই ফাংশন দিয়ে কমেন্টের পেজিনেশন দেখানো হয়।
+comments_open() - পোস্টে কমেন্ট এনাবল/ডিজাবল করা কিনা চেক করে দেখে।
+comment_form() - নতুন কমেন্ট করার ফর্ম দেখায়।
+```
