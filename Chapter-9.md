@@ -56,3 +56,16 @@ WP Ref Link: https://developer.wordpress.org/reference/functions/paginate_links/
 paginate_links( string|array $args = '' )
 ```
 অনেকগুো আর্গুমেন্ট রয়েছে। কোডেক্স থেকে আর্গুমেন্টগুলো সম্পর্কে বিস্তারিত জানা যাবে।
+
+### ৯.৪ - কাস্টম কোয়েরী তে setup_postdata() ইউজ না করে কিভাবে পোস্ট দেখানো যায়
+
+setup_postdata() ফাংশন ব্যবহার করে পোস্টের বিভিন্ন এট্রিবিউট ব্যবহার করে কাস্টম পোস্টের লিস্ট দেখানো হচ্ছে। **এইটাই আইডিয়াল পদ্ধতি।**
+
+এছাড়াও, অন্যভাবে লিস্ট দেখানো যায়।
+
+foreach লুপের মধ্যে $post এ্যারে ভ্যারিয়েবলকে print_r দিয়ে ইন্সপেক্ট করে এর মধ্যে থাকা এট্রিবিউটগুলোকে দেখে নিতে হবে। এরপর এই এট্রিবিউটগুলো echo করে লিস্ট বানানো যাবে। যেমন:
+
+```php
+echo apply_filters( 'the_title', $post->post_title ); // -- Post title
+echo esc_rul( $post->guid ); // - Post permalink
+```
