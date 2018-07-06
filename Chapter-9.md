@@ -45,3 +45,12 @@ echo paginate_links(
 ```
 
 কাস্টম কুয়েরীতে পেজিনেশনকে কাজ করানোর জন্য ২টা আর্গুমেন্ট পাস করতে হবে, $posts_per_page এবং $paged। কাস্টম কুয়েরীতে যতগুলো পোস্ট পুল করা হচ্ছে তাকে $posts_per_page দিয়ে ভাগ করে পেজিনেশনের পেজের লিংকগুলোকে ডিনামিক করা হচ্ছে।
+
+Technically, the function can be used to create paginated link list for any area.
+
+WP Ref Link: https://developer.wordpress.org/reference/functions/paginate_links/
+
+```php
+paginate_links( string|array $args = '' )
+```
+অনেকগুো আর্গুমেন্ট রয়েছে। কোডেক্স থেকে আর্গুমেন্টগুলো সম্পর্কে বিস্তারিত জানা যাবে।
