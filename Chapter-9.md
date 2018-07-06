@@ -114,3 +114,16 @@ $_p = new WP_Query(
  );
  ?>
 ```
+
+অথবা, শুধু একটি ক্যাটাগরি তুলে আনার জন্য
+
+```php
+$_p = new WP_Query(
+     array(
+         // 'category_name' => 'uncategorized', // Pass here "Category Slug"
+         'tag' => 'special'
+         'posts_per_page' => 3,
+         'paged' => $paged
+     )
+ );
+```
