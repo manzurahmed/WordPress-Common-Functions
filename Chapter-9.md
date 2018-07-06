@@ -131,3 +131,29 @@ $_p = new WP_Query(
 ### ৯.৭ - WP_Query ক্লাসের রিলেশনশিপ এবং জয়েনিং
 
 আগের ইপিসোডে একটি ক্যাটাগরীর পোস্টগুলো তুলে আনা হয়েছিল। যদি এর সাথে অন্য কোন ক্রাইটেরিয়ার পোস্ট, যেমন, নির্দিষ্ট কোন ট্যাগ, বা তারিখের পোস্ট, ইত্যাদি, তুলে আনতে হলে রিলেশন ও জয়েন ব্যবহার করতে হবে।
+
+মনে করি, এমন সিচুয়েশন আসল যে, আমাকে uncategorized ক্যাটাগরির সব পোস্ট এবং ঐ সমস্ত পোস্ট পুল করতে হবে যাদের ট্যাগ 'special'। এ রূপ ক্ষেত্রে tax_query করতে হবে। tax_query তে আমরা relation এর ক্ষেত্রে OR ব্যবহার করব এবং দু’টি কুয়েরী ক্লজকে join করব।
+
+```php
+$_p = new WP_Query(
+  array(
+      // 'category_name' => 'uncategorized', // Pass here "Category Slug"
+      // 'tag' => 'special',
+      'posts_per_page' => 2,
+      'paged' => $paged,
+      'tax_query' => array(
+          'relation' => 'OR',
+          array(
+              'taxonomy' => 'category',
+              'field' => 'slug',
+              'terms' => array('uncategorized')
+          ),
+          array(
+              'taxonomy' => 'post_tag',
+              'field' => 'slug',
+              'terms' => array('special')
+          )
+      )
+  )
+);
+```
