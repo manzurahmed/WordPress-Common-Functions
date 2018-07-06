@@ -79,3 +79,19 @@ https://codex.wordpress.org/Class_Reference/WP_Query
 WP_Query ব্যবহার করে পোস্টের যে ডাটাসেট এ্যারে পাওয়া যায় যায়, তা have_posts ব্যবহার করে while লুপ দিয়ে ইটারেট করে প্রতিটি পোস্টের বিভিন্ন এ্যাট্রিবিউটকে ওয়েবসাইটে দেখানো যায়। ফলে পোস্ট রিলেটেড ওয়ার্ডপ্রেসের স্ট্যান্ডার্ড সকলগুলো ফাংশনই ব্যবহার করার যায়। যেমন, have_posts, the_post, the_title, the_ID, ইত্যাদি।
 
 **নোট:** WP_Query ব্যবহার করে পাওয়া ডাটা লুপের মাধ্যমে দেখানো শেষ হওয়ার পরপরই ****অবশ্যই**** wp_reset_query() ব্যবহার করতে হবে।
+
+পেজিনেশন দেখানোর জন্য নিচের কোড ব্যবহার করতে হবে:
+
+```php
+<?php
+ echo paginate_links(
+     array(
+         'total' => $_p->max_num_pages, // In-built property. WP calculates it automatically
+         'current' => $paged, // need to calculate seperately
+         'prev_text' => __( 'New Posts', 'alpha'),
+         'next_text' => __( 'Old Posts', 'alpha'),
+         //'prev_next' => true, // When 'true', NO need to specify this argument
+     )
+ );
+ ?>
+```
