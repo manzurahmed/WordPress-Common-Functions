@@ -105,6 +105,43 @@ function alpha_protected_title_change()
 add_filter( 'protected_title_format', "alpha_protected_title_change" );
 ```
 
+# WPTD Class 3.20
+
+* মেনু তৈরীর ধাপ গুলো হল:
+1. functions.php তে মেনু লোকেশন তৈরী করা (register_nav_menu)
+2.  মেনু ডিসপ্লে করা (wp_nav_menu)
+3. Bootstrap 4 এ লিস্ট আইটেম কে horizontal alignment করতে হলে filter দিয়ে nav_menu_css_class হুক কে কলব্যাক ফাংশন দিয়ে প্রয়োজনীয় css যুক্ত করতে হয়।
+
+* মেনু লোকেশন তৈরী করা
+```php
+register_nav_menu( 'topmenu', __('Top Menu', 'alpha') );
+```
+
+* মেনু ডিসপ্লে করা
+```php
+<?php
+wp_nav_menu(
+    array(
+        'theme_location' => 'topmenu',
+        'menu_id' => 'topmenucontainer',
+        'menu_class' => 'list-inline text-center'
+    )
+);
+?>
+```
+
+* ফিল্টার দিয়ে প্রয়োজনীয় css যিুক্ত করা
+```php
+// Add a class to menu list item
+function alpha_menu_item_class( $classes, $item )
+{
+	$classes[] = 'list-inline-item';
+	return $classes;
+}
+add_filter( 'nav_menu_css_class', 'alpha_menu_item_class', 10, 2 );
+```
+
+
 # Class 3.21 থিমে এক্সটার্নাল জাভাস্ক্রিপ্ট ফাইল এনকিউ করা এবং লাইটবক্স/পপআপ দেখানো
 * **External** JS File enque from functions.php file
 ```php
