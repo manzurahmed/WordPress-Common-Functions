@@ -45,7 +45,7 @@ register_sidebar(
 add_action('widgets_init', 'alpha_sidebar');
 ```
 
-সাইডবার দেখানোর জন্য:
+সাইডবার দেখানো আগে চেক করে নিতে হবে, সাইডবারে কোন কন্টেন্ট আছে কি না:
 ```php
 <?php
 if(is_active_sidebar( 'sidebar-1' ))
@@ -56,7 +56,7 @@ if(is_active_sidebar( 'sidebar-1' ))
 ```
 
 # Class 3.19 পাসওয়ার্ড প্রটেকটেড পোস্ট ম্যানেজ করা
-পাসওয়ার্ড প্রটেকটেড পোস্ট ম্যানেজ করা
+
 * Method 1: Write Code in index.php or where necessary
 ```php
 if( !post_password_required() )
@@ -96,7 +96,7 @@ function alpha_the_excerpt( $excerpt )
 add_filter( "the_excerpt", "alpha_the_excerpt");
 ```
 
-* To omit the word "Protected: " from protected article's title, write another filter in functions.php file.
+* To **omit** the word **"Protected: "** from protected article's title, write another filter in functions.php file.
 ```php
 function alpha_protected_title_change()
 {
@@ -105,7 +105,6 @@ function alpha_protected_title_change()
 add_filter( 'protected_title_format', "alpha_protected_title_change" );
 ```
 
-
 # Class 3.21 থিমে এক্সটার্নাল জাভাস্ক্রিপ্ট ফাইল এনকিউ করা এবং লাইটবক্স/পপআপ দেখানো
 * **External** JS File enque from functions.php file
 ```php
@@ -113,12 +112,14 @@ wp_enqueue_script( 'featherlight', get_template_directory_uri() . '/assets/js/fe
 ```
 
 # Class 3.22 ইনটার্নাল জাভাস্ক্রিপ্ট ফাইল এনকিউ করা এবং ডিপেন্ডেন্সি নিয়ে আলোচনা
+
 * **Internal** JS File enque from functions.php file
 ```php
 wp_enqueue_script( 'alpha-main', get_template_directory_uri() . '/assets/js/main.js', null, '0.0.1', true );
 // OR, the file below can be used, but, get_theme_file_uri() function isn't available before 4.7 version of WordPress
 wp_enqueue_script( 'alpha-main', get_theme_file_uri('/assets/js/main.js'), null, '0.0.1', true );
 ```
+
 * Trick
 We can popup the image in big size with jQuery.
 Put the following code in main.js file in assets/js/main.js file.
@@ -145,11 +146,11 @@ $('.popup').each(function(){
 ?>
 ```
 
-এরপর page.php ফাইলের কনটেন্ট কপি করে নিয়ে এসে পেস্ট করব। এবার এই ফাইলের মধ্যে প্রয়োজনীয় পরিবর্তন গুলো করে ফেলতে হবে।
+এরপর **page.php** ফাইলের কনটেন্ট কপি করে নিয়ে এসে পেস্ট করব। এবার এই ফাইলের মধ্যে প্রয়োজনীয় পরিবর্তন গুলো করে ফেলতে হবে।
 
 # ৩.২৭ - কাস্টোমাইজারের সাহায্যে হেডার ইমেজ পরিবর্তন (add_theme_support)
 
-functions.php ফাইলে after_setup_theme হুকের কলব্যাকে custom-header এর জন্য নিচের কোডটি লিখব:
+Custom Header সাপোর্ট বাই-ডিফল্ট দেয়া থাকে না। এটাকে add_theme_support হুক দিয়ে এ্যাক্টিভিট করে নিতে হবে। functions.php ফাইলে after_setup_theme হুকের কলব্যাকে custom-header এর জন্য নিচের কোডটি লিখব:
 
 ```php
 // Add Custom Header support in the customizer
@@ -178,7 +179,7 @@ if( is_front_page() )
 ?>
 ```
 
-এখানে, প্রথমে চেক করা front page এ আছি কিনা। তারপর .header নামের একটি ক্লাসে ব্যাকগ্রাউন্ড ইমেজ হিসাবে কাস্টম হেডারের ইমেজটা দেখানো হচ্ছে।
+এখানে, প্রথমে চেক করা front page এ (অথবা, page এ) আছি কিনা। তারপর .header নামের একটি ক্লাসে ব্যাকগ্রাউন্ড ইমেজ হিসাবে কাস্টম হেডারের ইমেজটা দেখানো হচ্ছে।
 
 # ৩.২৮ - কাস্টোমাইজারে কাস্টম হেডার টেক্সট কালার পরিবর্তন
 
@@ -196,7 +197,7 @@ $alpha_custom_header_details = array(
 add_theme_support( 'custom-header', $alpha_custom_header_details );
 ```
 
-এতে কাস্টমাইজারে দুইটা নতুন সেটিং অপশন যুক্ত হয়। একটি Colors, অপরটি Site Identity এর মধ্যে “Display Site Title and Tagline" নামে চেকবক্স।
+এতে কাস্টমাইজারে দুইটা নতুন সেটিং অপশন যুক্ত হয়। একটি Colors, অপরটি Site Identity। এর মধ্যে “Display Site Title and Tagline" নামে চেকবক্স।
 
 আর্গুমেন্টে header-text কে false করলে, এই চেকবক্সটা চলে যায়।
 
