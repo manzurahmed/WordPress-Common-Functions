@@ -31,4 +31,11 @@
 - এ্যাডভান্সড
 - সাইড
 
+### ১৬.৪ - টিজিএম প্লাগইন অ্যাকটিভেশন লাইব্রেরী দিয়ে এসিএফ ইনস্টলেশন
+
+TGM Plugin Activation দিয়ে থিমের সাথে কোন প্লাগ-ইন কে রিকোয়ার্ড করে দেয়া যায়। http://tgmpluginactivation.com/download/ থেকে টিজিএম ডাউনলোড করে নিতে হবে। এ সময় "I'm going to use TGMPA in a:" এবং "I intend to distribute the theme via:" এই দু’টো অপশনে "Theme" এবং "ThemeForst" চুজ করে নিতে হবে।
+
+ডাউনলোডে একটা .zip ফাইল পাওয়া যাবে। এক্সট্রাক্ট করে নিই। এর মধ্যে থেকে class-tgm-plugin-activation.php ফাইলটি থিমের "lib" ফোল্ডারে রাখি। .zip ফাইল থেকে example.php ফাইলটি "inc" ফোল্ডারে রাখি এবং "tgm.php" নামে রিনেম করি। এরপর, tgm.php ফাইলে প্রয়োজনীয় এডিট করি।
+
+পরিশেষে, এই tgm.php ফাইলটি functions.php ফাইলের একেবারে উপরে require_once করে লোড করার ব্যবস্থা করে দিব।
 
