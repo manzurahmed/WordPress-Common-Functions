@@ -6,6 +6,7 @@
 3. Post Formats: https://codex.wordpress.org/Post_Formats
 4. Dashicons: https://developer.wordpress.org/resource/dashicons/
 5. WordPress User's Profile Account: http://en.gravatar.com/
+6. Generates WordPress code magically: https://www.wp-hasty.com/
 
 ### WordPress Plugins
 
