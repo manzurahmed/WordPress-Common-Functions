@@ -44,3 +44,32 @@ TGM Plugin Activation দিয়ে থিমের সাথে কোন প্
 এসিএফ এর সবচেয়ে বড় সুবিধা হল, এটার এ্যাডমিনিস্ট্রেশন GUI ভিত্তিক। মেটা ফিল্ডের জন্য প্রথমে ফিল্ড গ্রুপ তৈরী করতে হয়। পরে, এই গ্রুপে কি কি মেটা ফিল্ড থাকবে, তা একে একে তৈরী করতে হয়।
 
 তৈরী শেষে Settings থেকে এই ফিল্ডগ্রুপটি কোথায় দেখাবে তার পজিশন, লেবেল প্লেসমেন্ট, অর্ডার ইত্যাদি সেট করে দিতে পারি। অথবা, এই ফিল্ড গ্রুপটি Location সেকশন থেকে পোস্ট, পোস্ট টাইপ, পোস্ট ফরম্যান, ক্যাটাগরী, পেজ, পেজ টেমপ্লেট, ইউজার এরিয়া, ইউগেট এরিয়া, কমেন্ট এরিয়া - এ রকম এ্যাভেইলেবল গত ধরনের অপশন আছে, সব স্থানেই বসাতে পারব।
+
+### ১৬.৬ - এসিএফ মেটাফিল্ডের ডেটা ডিসপ্লে করা 
+
+এই এপিসোডে দেখানো হয়েছে কিভাবে একটি পোস্টের সাথে সংরক্ষণকৃত ACF মেটাডাটা কিভাবে ওয়েবসাইটে ঐ পোস্টের সিংগেল ভিউতে দেখানো যায়। নীচে কোড স্যাম্পল দেয়া হল:
+
+```php
+<?php
+// Video 16.6 - এসিএফ মেটাফিল্ডের ডেটা ডিসপ্লে করা
+if(get_post_format() == 'image'):
+?>
+<div class="meta-info">
+  <strong>Camera Model:</strong> <?php the_field("camera_model"); ?>
+  <br />
+  <strong>Location:</strong>
+    <?php $alpha_meta_location = get_field("location");
+    echo esc_html($alpha_meta_location);
+    ?>
+  <br />
+  <strong>Date:</strong> <?php the_field("date"); ?>
+  <br />
+
+  <?php if(get_field( "licensed")): ?>
+  <strong>License Information:</strong> <?php echo apply_filters("the_content", get_field('license_information')); ?>
+  <?php endif; ?>
+</div>
+<?php
+endif;
+?>
+```
