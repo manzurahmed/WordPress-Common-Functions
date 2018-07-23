@@ -6,5 +6,5 @@ CMB2 দিয়ে কাজ করতে হলে সব কিছুই কো
 
 এরপর cmb2-mb.php ফাইলটিকে functions.php ফাইলের এই উপরের দিকে সুবিধামত জায়গায় require_once ফাংশন দিয়ে লোড করে নিতে হবে।
 
-CMB2 Code Generator: http://willthemoor.github.io/cmb2-metabox-generator/
+CMB2 Code Generator by Hasin Hayder: http://willthemoor.github.io/cmb2-metabox-generator/
 
