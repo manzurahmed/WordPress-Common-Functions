@@ -7,6 +7,7 @@
 4. Dashicons: https://developer.wordpress.org/resource/dashicons/
 5. WordPress User's Profile Account: http://en.gravatar.com/
 6. Generates WordPress code magically: https://www.wp-hasty.com/
+7. CMB2 Code Generator by Hasin Hayder: http://willthemoor.github.io/cmb2-metabox-generator/
 
 ### WordPress Plugins
 
