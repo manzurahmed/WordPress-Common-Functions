@@ -16,6 +16,8 @@
 3. Attachments:
     https://wordpress.org/plugins/attachments/
     https://github.com/jchristopher/attachments/blob/master/docs/usage.md
+4. CMB2 Metabox, Custom Fields and Forms: https://github.com/CMB2/CMB2
+5. CMB2 Conditionals: https://github.com/jcchavezs/cmb2-conditionals
 
 ### Other Resources
 
