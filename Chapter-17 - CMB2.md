@@ -24,5 +24,43 @@ get_post_meta(get_the_ID, "_alpha_camera_model", true);
 
 ### ১৭.৩ - জাভাস্ক্রিপ্টের সাহায্যে CMB2 মেটাবক্সে ইন্টারঅ্যাকটিভিটি 
 
-এই ভিডিওতে পোস্ট ফরম্যাটের সিলেকশনের উপরে ভিত্তিকে মেটা ফিল্ড গ্রুপকে কিভাবে টগল করা যায়, তা দেখানো হয়েছে।
+এই ভিডিওতে পোস্ট ফরম্যাটের সিলেকশনের উপরে ভিত্তিকে মেটা ফিল্ড গ্রুপকে কিভাবে টগল করা যায়, তা দেখানো হয়েছে। এ্যাডমিনে admin.js নামের একটা আলাদা জেএস ফাইলকে ইনকিউ করে এতে ইমেজ পোস্ট টাইপ ক্লিক করলেই কেবল Image Information ফিল্ড গ্রুপটা দেখাবে। এর জন্য নিচের জেএস কোড ব্যবহার করা হয়েছে।
 
+```javascript
+;(function($){
+	$(document).ready(function(){
+		$("#post-formats-select .post-format").on("click", function(){
+			if( $(this).attr("id") == "post-format-image" ){
+				$("#_alpha_image_information").show();
+			} else {
+				$("#_alpha_image_information").hide();
+			}
+		});
+
+		if ( alpha_pf.format != "image" ) {
+			$("#_alpha_image_information").hide();
+		}
+	});
+})(jQuery);
+```
+
+### ১৭.৪ - CMB2 ইমেজ ফিল্ড নিয়ে বিস্তারিত
+
+এই পর্বে সিএমবি২ এর file uploader কন্ট্রোল নিয়ে আলোচনা করা হয়েছে। উদাহরণে মূলত ইমেজ আপলোড করা ও ইমেজকে ওয়েবসাইটে দেখানো হয়েছে।
+
+CMB2 তে ফিল্ড এর নামের শেষে **"_id"** যুক্ত করে দিলেই মিডিয়া (ইমেজ) **ফাইলের আইডি** পাওয়া যাবে
+
+ওয়েবসাইটে ইমেজ দেখানোর জন্য যে কোড তা নিম্নরূপ:
+
+```php
+<p>
+  <?php
+  // Video ১৭.৪ - CMB2 ইমেজ ফিল্ড নিয়ে বিস্তারিত
+  // CMB2 তে ফিল্ড এর নামের শেষে "_id" যুক্ত করে দিলেই মিডিয়া (ইমেজ) ফাইলের আইডি পাওয়া যাবে
+  $alpha_image = get_post_meta( get_the_ID(), "_alpha_image_id", true );
+  //print_r($alpha_image);
+  $alpha_image_details = wp_get_attachment_image_src( $alpha_image, "alpha-square" );
+  echo '<img src="' . esc_url( $alpha_image_details[0] ) . '" alt="" />';
+  ?>
+</p>
+```
