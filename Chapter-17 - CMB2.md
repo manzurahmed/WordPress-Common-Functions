@@ -101,3 +101,49 @@ $cmb->add_field( array(
 	?>
 </p>
 ```
+
+### ১৭.৬ - CMB2 তে রিপিটেবল ফিল্ডের সাহায্যে পাঁচমিনিটে প্রাইসিং টেবিল তৈরী করা
+
+রিপিটেবল ফিল্ড সিএমবি২ তে বিনামূল্যের একটি ফিচার। ACF এ এটা পেইড ফিচার। সিএমবি২ তে প্রাইসিং টেবিল তৈরী করার জন্য একটি পেজে ব্যবহারের জন্য আগে কোড তৈরী করে নিতে হবে। এর জন্য CMB2 Metabox Generator ওয়েবসাইটের সাহায্যে **রেগুলার** মেটাবক্স মার্কআপ জেনারেট করে নিতে হবে। এরপরে এই কোড কে গ্রুপ হিসাবে মডিফাই করে নিতে হবে।
+
+```php
+add_action( 'cmb2_init', 'cmb2_add_pricingtable' );
+function cmb2_add_pricingtable() {
+
+	$prefix = '_alpha_pt_';
+
+	$cmb = new_cmb2_box( array(
+		'id'           => $prefix . 'pricing_table',
+		'title'        => __( 'Pricing Table', 'alpha' ),
+		'object_types' => array( 'page' ),
+		'context'      => 'normal',
+		'priority'     => 'default',
+	) );
+
+	$group = $cmb->add_field( array(
+		'name' => __( 'Pricing Table', 'alpha' ),
+		'id' => $prefix . 'pricing_table',
+		'type' => 'group',
+	) );
+
+	$cmb->add_group_field( $group, array(
+		'name' => __( 'Caption', 'alpha' ),
+		'id' => $prefix . 'pricing_caption',
+		'type' => 'text',
+	) );
+	$cmb->add_group_field( $group, array(
+		'name' => __( 'Pricing Option', 'alpha' ),
+		'id' => $prefix . 'pricing_option',
+		'type' => 'text',
+		'repeatable' => true
+	) );
+	$cmb->add_group_field( $group, array(
+		'name' => __( 'Price', 'alpha' ),
+		'id' => $prefix . 'price',
+		'type' => 'text',
+	) );
+}
+```
+
+CMB2 Metabox Code Generator: http://willthemoor.github.io/cmb2-metabox-generator/
+
