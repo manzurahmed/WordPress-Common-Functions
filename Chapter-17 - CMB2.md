@@ -64,3 +64,40 @@ CMB2 তে ফিল্ড এর নামের শেষে **"_id"** যু
   ?>
 </p>
 ```
+
+### ১৭.৫ - CMB2 ফাইল আপলোড ফিল্ড নিয়ে বিস্তারিত
+
+CMB2 তে আপলোড ফিচারের জন্য file টাইপের কন্ট্রোল ব্যবহার করা হয়। কোডের মাধ্যমে আপলোড বাটনের ক্যাপশন, কি কি ধরণের ফাইল আপলোড করতে পারবে তার রেস্ট্রিকশন, ফাইল সিলেক্ট করার পর সেই ফাইলের path দেখাবে কি না, ইত্যাদি নিয়ন্ত্রণ করা যায়।
+
+```php
+$cmb->add_field( array(
+	'name' => __( 'Upload Resume', 'alpha' ),
+	'id' => $prefix . 'resume',
+	'type' => 'file',
+	// Change upload button text
+	'text' => array(
+		'add_upload_file_text' => __('Upload PDF file', 'alpha'),
+	),
+	// Only allow PDF files
+	'query_args' => array(
+		'type' => array( 'application/pdf' )
+	),
+	'options' => array(
+		'url' => false
+	)
+) );
+```
+
+আপলোড করা ফাইলকে ফ্রন্টএন্ডে দেখানোর জন্য নীচের কোড ব্যবহার করা যেতে পারে:
+
+```php
+<p>
+	<?php
+	// Video ১৭.৫ - CMB2 ফাইল আপলোড ফিল্ড নিয়ে বিস্তারিত
+	$alpha_pdf_file = get_post_meta( get_the_ID(), "_alpha_resume", true);
+	if( !empty($alpha_pdf_file)):
+	echo "Download: " . '<a href="'. $alpha_pdf_file .'" download>PDF</a>';
+	endif;
+	?>
+</p>
+```
