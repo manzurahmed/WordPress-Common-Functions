@@ -147,3 +147,6 @@ function cmb2_add_pricingtable() {
 
 CMB2 Metabox Code Generator: http://willthemoor.github.io/cmb2-metabox-generator/
 
+### ১৭.৭ - CMB2 দিয়ে খুব সহজেই একটা রিপিটেবল কনটেন্ট ব্লক (যেমন সার্ভিস) বানানো
+
+এই পর্বে সিএমবি২ এর রিপিটেবল কনটেন্ট ব্লক দিয়ে একটি সার্ভিস পেজ বানানো দেখানো হয়েছে। এই পর্বটি ১৭.৬ এর মতই।
