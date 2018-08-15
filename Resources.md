@@ -11,17 +11,21 @@
 
 ### WordPress Plugins
 
-1. Regenerate Thumbnail Plugin
-2. FakerPress
+1. Regenerate Thumbnail Plugin: https://wordpress.org/plugins/regenerate-thumbnails/
+2. FakerPress: https://wordpress.org/plugins/fakerpress/
 3. Attachments:
     https://wordpress.org/plugins/attachments/
     https://github.com/jchristopher/attachments/blob/master/docs/usage.md
 4. CMB2 Metabox, Custom Fields and Forms: https://github.com/CMB2/CMB2
 5. CMB2 Conditionals: https://github.com/jcchavezs/cmb2-conditionals
+7. WP Google Maps: https://wordpress.org/plugins/wp-google-maps/
+8. Advanced Custom Fields: https://www.advancedcustomfields.com/
+9. Duplicate Post: https://wordpress.org/plugins/duplicate-post/
+10. Post Meta Inspector: https://wordpress.org/plugins/post-meta-inspector/
 
 ### Other Resources
 
-1. https://www.toptal.com/designers/subtlepatterns/
+1. Subtle Patterns - Repeatable patterns: https://www.toptal.com/designers/subtlepatterns/
 2. List of HTTP status codes: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 
 ### jQuery Plugin Resources
