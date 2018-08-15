@@ -22,6 +22,7 @@
 8. Advanced Custom Fields: https://www.advancedcustomfields.com/
 9. Duplicate Post: https://wordpress.org/plugins/duplicate-post/
 10. Post Meta Inspector: https://wordpress.org/plugins/post-meta-inspector/
+11. Contact Form 7: https://wordpress.org/plugins/contact-form-7/
 
 ### Other Resources
 
