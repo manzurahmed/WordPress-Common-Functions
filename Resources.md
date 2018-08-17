@@ -28,6 +28,7 @@
 
 1. Subtle Patterns - Repeatable patterns: https://www.toptal.com/designers/subtlepatterns/
 2. List of HTTP status codes: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+3. Envator WordPress Theme Check: https://github.com/envato/envato-theme-check
 
 ### jQuery Plugin Resources
 1. FeatherLight Popup: https://noelboss.github.io/featherlight/
