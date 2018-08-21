@@ -19,3 +19,28 @@ function after_title_display() {
 }
 add_action( "philosophy_after_title_display", "after_title_display" );
 ```
+
+category.php ফাইলের উপর আরেকটা do_action হুক যুক্ত করা হয়েছে। এর আর্গুমেন্টের দ্বিতীয় প্যারামিটারে ক্যাটাগরীর নাম পাস করা হচ্ছে। এই নামের কোন ক্যাটাগরী পেজে আসলে একটা করে হিট কাউন্টার বাড়ানো হবে। অর্থাৎ ঐ ক্যাটাগরী কি রকম ভিউ হচ্ছে তার স্ট্যাট সংগ্রহ করা হচ্ছে। আমার ওয়ার্ডপ্রেসের অপশন টেবিলের নাম ছিল, alp_options। functions.php ফাইলে philosophy_category_page অ্যাকশন হুকের জন্য add_action হুক যুক্ত করে কলব্যাক ফাংশন লিখব, তখন অপশন টেবিলে category_tips_and_tricks_counter নামে একটি নতুন অপশন এন্ট্রি (row) যুক্ত হবে। যত বার Tips and Tricks ক্যাটাগরী পেজটি ভিউ হবে, তত বার ঐ ক্যাটাগরীর কাউন্টার এক এক করে বাড়তে থাকবে।
+
+এটা করতে হলে নিচের মত করে কোড লিখতে পারি:
+
+```php
+do_action( "philosophy_category_page", single_cat_title( '', false ) );
+```
+
+আর functions.php ফাইলের কোড:
+
+```php
+function beginning_category_page( $category_title ) {
+	if( "Tips and Tricks" == $category_title ) {
+		$visit_count = get_option("category_tips_and_tricks_counter" );
+		$visit_count = $visit_count ? $visit_count : 0;
+		$visit_count++;
+
+		// write to alp_options table
+		update_option( "category_tips_and_tricks_counter", $visit_count );
+	}
+}
+add_action( "philosophy_category_page", "beginning_category_page");
+```
+
