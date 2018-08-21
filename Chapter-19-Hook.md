@@ -49,3 +49,17 @@ add_action( "philosophy_category_page", "beginning_category_page");
 থিমের কোন স্থানে ফিল্টার হুক যুক্ত করতে হলে **add_filters( "filter_name", "text_to_display_and_modify" );** ব্যবহার করতে হবে। ফিল্টার সব সময় ডাটা গ্রহণ করে। এই ফিল্টারকে কাস্টমাইজ করতে হলে functions.php ফাইলে **add_filter("filter_name", "callback_function_name" );** যুক্ত করতে হবে।;
 
 থিমের গুরুত্বপূর্ণ প্যারামিটারের ক্ষেত্রে ফিল্টার হুক লিখে রাখা ভাল। তাহলে ক্লায়েন্টের জন্য থিম কাস্টমাইজ করার সুবিধা হয়। আর, ক্লায়েন্ট থিম পছন্দ করলে **সেল বাড়বে**।
+
+থিমের যে স্থানে নীচের কোডে লিখব, ওয়েবসাইটে সেখানে আউটপুট দেখাবে "Hello World"।
+```php
+echo apply_filters( "philosophy_text", "Hello world" );
+```
+
+এখন, বায়ার যদি Hello World কথাটাকে নিজের মত পরিবর্তন করতে চান, তবে থিমের কোড পরিবর্তন করতে হবে না। তিনি functions.php ফাইলে apply_filter ব্যবহার করে কথাটাকে Capitalize করতে চান, বা, যে কোন ধরনের কাস্টমাইজ করে নিতে পারবেন।
+
+```
+function capital_text( $text ) {
+	return strtoupper( $text );
+}
+add_filter( "philosophy_text", "capital_text" );
+```
