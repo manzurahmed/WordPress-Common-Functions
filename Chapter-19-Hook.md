@@ -63,3 +63,7 @@ function capital_text( $text ) {
 }
 add_filter( "philosophy_text", "capital_text" );
 ```
+
+add_filter এ চারটা আর্গুমেন্ট ব্যবহার করা যায়। ১. হুকের নাম ২. কলব্যাক ফাংশন, ৩. প্রায়োরিটি, এবং, ৪. কতগুলো প্যারামিটার
+
+
