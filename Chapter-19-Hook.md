@@ -44,3 +44,8 @@ function beginning_category_page( $category_title ) {
 add_action( "philosophy_category_page", "beginning_category_page");
 ```
 
+## ১৯.২ - ফিল্টার হুক এবং হুকের প্যারামিটার নিয়ে বিস্তারিত
+
+থিমের কোন স্থানে ফিল্টার হুক যুক্ত করতে হলে **add_filters( "filter_name", "text_to_display_and_modify" );** ব্যবহার করতে হবে। ফিল্টার সব সময় ডাটা গ্রহণ করে। এই ফিল্টারকে কাস্টমাইজ করতে হলে functions.php ফাইলে **add_filter("filter_name", "callback_function_name" );** যুক্ত করতে হবে।;
+
+থিমের গুরুত্বপূর্ণ প্যারামিটারের ক্ষেত্রে ফিল্টার হুক লিখে রাখা ভাল। তাহলে ক্লায়েন্টের জন্য থিম কাস্টমাইজ করার সুবিধা হয়। আর, ক্লায়েন্ট থিম পছন্দ করলে **সেল বাড়বে**।
