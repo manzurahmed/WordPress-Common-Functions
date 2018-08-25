@@ -55,3 +55,4 @@ load_theme_textdomain( 'philosophy', get_theme_file_path("/languages") );
 
 তবে, grunt ব্যবহার করে এই প্রক্রিয়াকে অটোমেট করা যায়।
 
+**মনে রাখতে হবে**, wp-config.php এর locale অনুযায়ী সংশ্লিষ্ট ভাষার .mo ফাইল লোড হবে এবং ওয়েবসাইটে সেই ভাষা দেখাবে।
