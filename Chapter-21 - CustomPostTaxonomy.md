@@ -63,3 +63,15 @@ Text Domain: philosophy-companion
 
 পরবর্তীতে থিম ডিসট্রিবিউট করার সময় থিমের মধ্যে plugins নামে একটি ফোল্ডার বানিয়ে আমাদের নতুন প্লাগইনকে .zip করে রেখে দিতে হবে। এবং, TGMPA দিয়ে রিকোয়ার্ড প্লাগইন হিসাবে ইন্সটল করার ব্যবস্থা করে দিতে হবে।
 
+## ২১.৫ - কোড জেনারেশন টুলের সাহায্য নেয়া
+
+অনলাইন দু’টি ওয়েবসাইটের মাধ্যমে ওয়ার্ডপ্রেসের এ্যাডমিন ও ওয়েবসাইটের ফিচারের জন্যবিভিন্ন ধরনের কোড জেনারেটর করা যায়। যেমন: widget, menu, custom post type, admin option, nav menu, sidebar।
+
+সাইট দু’টো হল:
+
+1. WordPress Code Generator 1: https://www.wp-hasty.com/tools/
+2. WordPress Code Generator 2: https://generatewp.com/
+
+#### লক্ষ্যনীয়:
+
+Custom Post Type UI এর কোড অনেক পরিষ্কার ও সংক্ষেপিত।
