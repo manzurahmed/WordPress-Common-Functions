@@ -8,6 +8,8 @@
 5. WordPress User's Profile Account: http://en.gravatar.com/
 6. Generates WordPress code magically: https://www.wp-hasty.com/
 7. CMB2 Code Generator by Hasin Hayder: http://willthemoor.github.io/cmb2-metabox-generator/
+8. WordPress Code Generator 1: https://www.wp-hasty.com/tools/
+9. WordPress Code Generator 2: https://generatewp.com/
 9. Language Transation POedit: https://poedit.net/
 
 ### WordPress Plugins
