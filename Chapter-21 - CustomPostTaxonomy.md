@@ -128,3 +128,35 @@ if ( is_post_type_archive( 'book' ) ) {
 PT;
 	}
 ```
+
+## ২১.৮ - কাস্টম পোস্টে মেটাবক্স বাইন্ড করা এবং কাস্টম মেটা কোয়েরী চালানো
+
+এই পর্বে কাস্টম পোস্টের সাথের মেটাবক্স যুক্ত করা হয়েছে এবং মেটা ডাটার উপরে ভিত্তি করে কাস্টম কোয়েরী চালান হয়েছে।
+
+প্রথমে একটি টেমপ্লেট ফাইল বানিয়ে নেই। index.php ফাইলকে কপি-পেস্ট করে featured-book.php নামে একটি নতুন ফাইল তৈরী করে নিব। সবার উপরে লিখব:
+
+```php
+/*
+Template Name: Featured Books
+*/
+```
+
+এবার ACF, CMB2 বা CodeStar দিয়ে একটি কাস্টম মেটাফিল্ড বানিয়ে book সিপিটির মধ্যে ৪/৫ টি বইয়ের ইন্ট্রি দিই। এন্ট্রি দেয়ার সময় is_featured চেকবক্স অন করে দিতে হবে।
+
+এবার একটি কাস্টম কুয়েরী লিখব, যেটি book নামের সিপিটি থেকে থেকে is_featured যুক্ত বইগুলো ডাটাবেস থেকে পুল করে আনবে।
+
+```php
+$philosophy_cpt_arguments = array(
+                    'post_type' => 'book',
+                    'meta_key' => 'is_featured',
+                    'meta_value' => true
+                );
+
+                $philosophy_books = new WP_Query( $philosophy_cpt_arguments );
+
+                while( $philosophy_books->have_posts() ) {
+                    $philosophy_books->the_post();
+
+                    get_template_part( "template-parts/post-formats/post", get_post_format() );
+                }
+```
