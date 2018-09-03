@@ -195,3 +195,5 @@ function philosophy_cpt_slug_fix( $post_link, $id ) {
 	}
 }
 add_filter( 'post_type_link', 'philosophy_cpt_slug_fix', 1, 2 );
+
+**post_type_link** হুকটি সবসময় slug তৈরীর কাজে ব্যবহৃত হয়।
