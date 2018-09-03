@@ -178,3 +178,20 @@ $philosophy_cpt_arguments = array(
 
 এই ভিডিওতে দুই বা ততোধিক কাস্টম পোস্ট টাইপের মধ্যে রিলেশনশিপ তৈরীর পদ্ধতি নিয়ে আলোচনা করা হয়েছে। সেই সাথে, url rewriting টাই দেখানো হয়েছে। উদাহরণ হিসাবে book এবং chapter এর মধ্যে রিলেশনশিপের ব্যাপারটা তুলে ধরা হয়েছে। ওয়েবসাইটে যখন ডাটা দেখাবে, তখন url হবে এরকম, localhost/philosophy/book/chapter-1।
 
+প্যারেন্ট ও চাইল্ডৈর মধ্যে রিলেশন স্টাবলিস করার পর URL Rewrite করা হয়েছে। URL Rewrite করার জন্য post_type_link হুক ব্যবহার করা হয়েছে, যার কলব্যাক ফাংশনটি নিচের মত ছিল:
+
+function philosophy_cpt_slug_fix( $post_link, $id ) {
+	$p = get_post( $id );
+
+	if( is_object( $p ) && 'chapter' == get_post_type( $id )) {
+		$parent_post_id = get_field( 'parent_book' );
+		$parent_post = get_post( $parent_post_id );
+
+		if( $parent_post ) {
+			$post_link = str_replace( '%book%', $parent_post->post_name, $post_link );
+		}
+
+		return $post_link;
+	}
+}
+add_filter( 'post_type_link', 'philosophy_cpt_slug_fix', 1, 2 );
