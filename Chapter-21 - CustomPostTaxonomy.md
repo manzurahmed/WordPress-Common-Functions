@@ -197,3 +197,31 @@ function philosophy_cpt_slug_fix( $post_link, $id ) {
 add_filter( 'post_type_link', 'philosophy_cpt_slug_fix', 1, 2 );
 
 **post_type_link** হুকটি সবসময় slug তৈরীর কাজে ব্যবহৃত হয়।
+
+## ২১.১১ - প্যারেন্ট কাস্টম পোস্ট থেকে মেটা কোয়েরী দিয়ে চিলড্রেন কাস্টম পোস্ট খুঁজে বের করা
+
+আগের ভিডিওতে book এবং chapter এর মধ্যে রিলেশনশিপ তৈরী করা হয়েছে। একটা বই এর অধীনে অনেকগুলো চ্যাপ্টার থাকতে পারে। ধরি, ওয়েবসাইটে আমরা Book 1 নামে বইটি দেখছি। বইয়ের সিঙ্গেল ভিউ পেজে বইটির ডিটেইলের নীচে এর চ্যাপ্টারগুলোর লিস্ট দেখানো হবে। এর জন্য single-book.php ফাইলে কিছু WP_Query দিয়ে মেটা কুয়েরী চালানো হবে এবং সেগুলো আউটপুট আকারে দেখানো হবে।
+
+```php
+$philosophy_ch_args = array(
+    'post_type' => 'chapter',
+    'posts_per_page' => -1,
+    'meta_key' => 'parent_book',
+    'meta_value' => get_the_ID()
+);
+
+$philosophy_chapters = new WP_Query( $philosophy_ch_args );
+//echo $philosophy_chapters->found_posts;
+echo '<h3>';
+_e( "Chapters", "philosophy" );
+echo '</h3>';
+
+while( $philosophy_chapters->have_posts() ) {
+    $philosophy_chapters->the_post();
+    $philosophy_chl = get_the_permalink();
+    $philosophy_cht = get_the_title();
+
+    printf( "<a href='%s'>%s</a><br />", $philosophy_chl, $philosophy_cht );
+}
+```
+
