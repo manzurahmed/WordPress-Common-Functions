@@ -225,3 +225,67 @@ while( $philosophy_chapters->have_posts() ) {
 }
 ```
 
+২১.১২ - অ্যাডমিন প্যানেলে কাস্টম পোস্ট রিলেশনশিপের ভিজ্যুয়াল রিপ্রেজেন্টেশন এবং ড্র‍্যাগ/ড্রপের মাধ্যমে অর্ডার পরিবর্তন করা
+
+"CMB2 Attached Posts" plugin এর .zip ফাইল ডাউনলোড করে ইন্সটল করে নিতে হবে। cmb2-attached-posts.php ফাইলটি inc ফোল্ডারে রেখে functions.php ফাইলে require_once দিয়ে ইনক্লুড করে নিতে হবে। ফাইলটি ওপেন করে নিচের দুটি লাইন মুছে বা কমেন্ট করে দিতে হবে।
+
+```php
+//require_once WPMU_PLUGIN_DIR . '/cmb2/init.php';
+//require_once WPMU_PLUGIN_DIR . '/cmb2-attached-posts/cmb2-attached-posts-field.php';
+```
+
+এখন cmb2_attached_posts_field_metaboxes_example ফাংশনে কারেন্ট book এর আইডি দিয়ে এর সাথে রিলেটেড চ্যাপ্টারগুলো বের করতে হবে। যেহেতু আমরা যখন একটি বইয়ের চ্যাপ্টারের অর্ডার পরিবর্তন করব, তখন আমরা এ্যাডমিন প্যানেলে থাকব। অ্যাডমিন প্যানেলে get_the_ID() ফাংশন দিয়ে কারেন্ট বইয়ের আইডি পাওয়া যাবে না। তাই বিকল্প উপায়ে বইয়ের আইডি বের করতে হবে।
+
+```php
+// Video 21.12
+// We are working in Admin panel.
+// So, we need to find out current book's ID.
+$post_id = 0;
+if( isset( $_REQUEST['post'] ) || isset( $_REQUEST['post_ID'] ) ) {
+	$post_id = empty( $_REQUEST['post_ID'] ) ? $_REQUEST['post'] : $_REQUEST['post_ID'];
+}
+
+$example_meta = new_cmb2_box( array(
+	'id'           => 'cmb2_attached_posts_field',
+	'title'        => __( 'Attached Posts', 'philosophy' ),
+	'object_types' => array( 'book' ), // Post type
+	'context'      => 'normal',
+	'priority'     => 'high',
+	'show_names'   => false, // Show field names on the left
+) );
+
+$example_meta->add_field( array(
+	'name'    => __( 'Chapters', 'philosophy' ),
+	'desc'    => __( 'Drag posts from the left column to the right column to attach them to this page.<br />You may rearrange the order of the posts in the right column by dragging and dropping.', 'philosophy' ),
+	'id'      => 'attached_cmb2_attached_posts',
+	'type'    => 'custom_attached_posts',
+	'column'  => true, // Output in the admin post-listing as a custom column. https://github.com/CMB2/CMB2/wiki/Field-Parameters#column
+	'options' => array(
+		'show_thumbnails' => true, // Show thumbnails on the left
+		'filter_boxes'    => true, // Show a text box for filtering the results
+		'query_args'      => array(
+			'posts_per_page' => -1,
+			'post_type'      => 'chapter',
+			// Video 21.12
+			'meta_key'		=> 'parent_book',
+			'meta_value'	=> $post_id
+		), // override the get_posts args
+	),
+) );
+```
+
+"CMB2 Attached Posts" plugin ব্যবহার করা হলে একটি Book এর মধ্যে তার রিলেটেড চ্যাপ্টারগুলোকে "CMB2 Attached Posts" এর নিজস্ব ড্রাগ-এন্ড-ড্রপ অর্ডার ম্যানেজমেন্ট এরিয়ার মধ্যে দেখা যাবে। এখানে ইচ্ছামত রিলেটেড চ্যাপ্টারগুলোর অর্ডার পরিবর্তন করা যাবে।
+
+আমাদের সেট করা অর্ডার অনুযায়ী ফ্রন্টএন্ডে একটি বইয়ের চ্যাপ্টারগুলোকে দেখাতে হলে নিচের কোড প্রয়োজন হবে। এই কোড single-book.php ফাইলে লিখতে হবে।
+
+```php
+$philosophy_cmb2_chapters = get_post_meta( get_the_ID(), 'attached_cmb2_attached_posts', true );
+//print_r($philosophy_cmb2_chapters);
+
+foreach( $philosophy_cmb2_chapters as $pchapter) {
+    $philosophy_chl = get_the_permalink( $pchapter);
+    $philosophy_cht = get_the_title($pchapter);
+
+    printf( "<a href='%s'>%s</a><br />", $philosophy_chl, $philosophy_cht );
+}
+```
