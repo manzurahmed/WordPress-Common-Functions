@@ -22,6 +22,7 @@
 4. CMB2 Metabox, Custom Fields and Forms: https://github.com/CMB2/CMB2
 5. CMB2 Conditionals: https://github.com/jcchavezs/cmb2-conditionals
 6. CMB2 Attached Posts Field: https://github.com/CMB2/cmb2-attached-posts
+   ("CMB2 Attached Posts Field" can't be installed as required plugin via TGMPA)
 7. WP Google Maps: https://wordpress.org/plugins/wp-google-maps/
 8. Advanced Custom Fields: https://www.advancedcustomfields.com/
 9. Duplicate Post: https://wordpress.org/plugins/duplicate-post/
