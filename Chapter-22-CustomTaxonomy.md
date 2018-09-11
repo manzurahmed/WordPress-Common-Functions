@@ -21,3 +21,17 @@
 এখানে, URL rewrite করতে হবে। এ জন্য, আমরা CPT UI এর Settings থেকে "Rewrite With Front" কে False করে দিয়ে "Custom Rewrite Slug" এ লিখব, "/books/language"। এরপর "Save Taxonomy" বাটনে ক্লিক করে আমার নতুন সেটিংগুলো সেভ করে নিব।
 
 এবার, Books থেকে Chapter এ যাব। English টার্ম এর উপরে মাউস হোভার করে View লিংকে গেলে শুধু English টার্মযুক্ত বইগুলোর তালিকা দেখাবে। খেয়াল করব যে, এবার URL টি পরিবর্তিত হয়ে http://localhost/alpha/books/language/english/ দেখাচ্ছে।
+
+এবার, সিঙ্গেল বুক ভিউতে প্রতিটি বইয়ের জন্য যে ট্যাগ যুক্ত করা হয়েছে, সেগুলো দেখানো পালা। single-book.php ফাইলটি ওপেন করে নিচের কোড লিখি:
+
+```php
+the_terms( get_the_ID(), 'language', '', '', '' );
+```
+
+কাস্টম ট্যাক্সোনমি দেখানো জন্য the_terms() ফাংশনটি ব্যবহৃত হয়, যার প্যারামিটার সিগনেচার হল,
+
+```php
+the_terms( $id, $taxonomy, $before = '', $sep = ', ', $after = '' )
+```
+
+ট্যাক্সোনমির জন্য আলাদা পেজ বানানো যেতে পারে। যেমন: language ট্যাক্সোনমির জন্য বানাতে হবে, taxonomy-language.php ফাইল। আবার, আরও স্পেসিফিক ট্যাক্সোনমি যেমন: english এর জন্য বানাতে হবে, taxonomy-language-english.php ফাইল।
