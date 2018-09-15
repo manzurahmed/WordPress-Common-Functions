@@ -45,3 +45,56 @@ the_terms( $id, $taxonomy, $before = '', $sep = ', ', $after = '' )
 **ট্যাক্সোনমির জন্য আলাদা পেজ বানানো**
 
 ট্যাক্সোনমির জন্য আলাদা পেজ বানানো যেতে পারে। যেমন: language ট্যাক্সোনমির জন্য বানাতে হবে, taxonomy-language.php ফাইল। আবার, আরও স্পেসিফিক ট্যাক্সোনমি যেমন: english এর জন্য বানাতে হবে, taxonomy-language-english.php ফাইল।
+
+## ২২.২ - কাস্টম ট্যাক্সোনমির টার্মসগুলো বের করা এবং আমরা টার্মস পেজে আছি কিনা সেটা চেক করা
+
+footer.php ফাইলে দু’টা ফিল্টার যুক্ত করা হয়েছে। কোন পেজে আছি, তার উপরে ভিত্তিকে করে কিভাবে কাস্টম ট্যাক্সোনমি বা ট্যাগ দেখানো যায়, সেটা এই পর্বে দেখানো হয়।
+
+```
+<?php
+// ২২.২ - কাস্টম ট্যাক্সোনমির টার্মসগুলো বের করা এবং আমরা টার্মস পেজে আছি কিনা সেটা চেক করা
+$philosophy_footer_tag_heading = apply_filters( "philosophy_footer_tag_heading", __( 'Tags', 'philosophy' ) );
+$philosophy_footer_tag_items = apply_filters( "philosophy_footer_tag_items", get_tags() );
+?>
+
+<h3><?php echo esc_html( $philosophy_footer_tag_heading ); ?></h3>
+
+<div class="tagcloud">
+    <?php
+    //the_tags( "", "", "" );
+    // ২২.২ - কাস্টম ট্যাক্সোনমির টার্মসগুলো বের করা এবং আমরা টার্মস পেজে আছি কিনা সেটা চেক করা
+    if( is_array($philosophy_footer_tag_items) ) {
+        foreach( $philosophy_footer_tag_items as $pti) {
+            printf( '<a href="%s">%s</a>', get_term_link($pti->term_id), $pti->name );
+        }
+    }
+    ?>
+</div> <!-- end tagcloud -->
+```
+
+functions.php ফাইলের কনটেন্ট:
+
+```php
+function philosophy_footer_language_heading( $title )
+{
+	if( is_post_type_archive( 'book' ) || is_tax('language') ) {
+		
+		$title = __( 'Languages', 'philosophy' );
+	}
+
+	return $title;
+}
+add_filter( "philosophy_footer_tag_heading", "philosophy_footer_language_heading" );
+// ২২.২ - কাস্টম ট্যাক্সোনমির টার্মসগুলো বের করা এবং আমরা টার্মস পেজে আছি কিনা সেটা চেক করা
+function philosophy_footer_language_terms( $tags ) {
+	if ( is_post_type_archive('book') || is_tax('language') ) {
+		$tags = get_terms(array(
+			'taxonomy' => 'language',
+			'hide_empty' => true
+		));
+	}
+
+	return $tags;
+}
+add_filter( "philosophy_footer_tag_items", "philosophy_footer_language_terms" );
+```
