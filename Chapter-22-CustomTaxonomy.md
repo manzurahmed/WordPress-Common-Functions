@@ -98,3 +98,44 @@ function philosophy_footer_language_terms( $tags ) {
 }
 add_filter( "philosophy_footer_tag_items", "philosophy_footer_language_terms" );
 ```
+
+## ২২.৩ - ট্যাক্স কোয়েরীর সাথে পরিচয়
+
+এই পর্বে দেখানো হয়েছে কিভাবে WP_Query দিয়ে কাস্টম পোস্টের সাথে যুক্ত করা কাস্টম ট্যাক্সোনমি’র টার্ম দিয়ে ডাটা পুল করা যায়। একে সংক্ষেপে বলা হয়, ট্যাক্স কুয়েরী।
+
+প্রথমে, taxquery.php নামে একটা আলাদা ”পেজ টেমপ্লেট” (Tax Query Example) বানানো হয়। এর সাথে, ওয়ার্ডপ্রেস এ্যাডমিন থেকে একটি নতুন পেজ তৈরী করে, তাতে ঐ পেজ টেমপ্লেটটা সিলেক্ট করে পেজটি পাবলিশ করে দিব।
+
+পেজ টেমপ্লেটে WP_Query দিয়ে কাস্টম পোস্টের ডাটা যেভাবে পুল করা হয়েছে, তা নিচে দেওয়া হল:
+
+```php
+<?php
+/*
+* Template Name: Tax Query Example
+*/
+
+$philosophy_query_args = array(
+	'post_type' => 'book',
+	'posts_per_page' => -1,
+	'tax_query' => array(
+		array(
+			'taxonomy' => 'language',
+			'field' => 'slug',
+			// For SINGLE tax term
+			'terms' => 'english'
+			// For MULTIPLE tax term
+			//'terms' => array('bangla', 'english')
+		)
+	)
+);
+
+$philosophy_posts = new WP_Query( $philosophy_query_args );
+
+while( $philosophy_posts->have_posts() ) {
+	$philosophy_posts->the_post();
+	the_title();
+	echo "<br />";
+}
+
+// Reset to Default Query
+wp_reset_query();
+```
