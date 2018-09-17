@@ -139,3 +139,47 @@ while( $philosophy_posts->have_posts() ) {
 // Reset to Default Query
 wp_reset_query();
 ```
+
+## ২২.৪ - সিম্পল ট্যাক্স কোয়েরী রিলেশনশিপ
+
+বইয়ের লিস্টের কথাই ধরি। কিছু বই bangla বা english ভাষায় লেখা হয়েছে। কিন্তু, একটি বই bangla এবং english, উভয় ভাষাতেই লেখা হয়েছে। কিন্তু, সমস্যা হল, ট্যাক্স কুয়েরি চালালে ঐ বইটিও পুল হয়ে যাবে, যার দু’টি ভাষা সেট করা আছে।
+
+কিন্তু, আমি চাচ্ছি যে, যে সকল বইয়ের দু’টি ভাষা আছে, সেগুলোই ট্যাক্স কুয়েরিতে আসুক। এই ক্ষেত্রে, ট্যাক্স কুয়েরীতে রিলেশনশিপ স্থাপন করতে হবে। আগের পর্বে লেখা কুয়েরী’র আর্গুমেন্টের tax_query প্যারামিটারে এ্যারে আকারে রিলেশনশিপটা স্থাপন করা হয়েছে।
+
+```php
+*/
+// ২২.৪ - সিম্পল ট্যাক্স কোয়েরী রিলেশনশিপ
+$philosophy_query_args = array(
+	'post_type' => 'book',
+	'posts_per_page' => -1,
+	'tax_query' => array(
+
+		'relation' => 'AND',
+		array(
+			'taxonomy' => 'language',
+			'field' => 'slug',
+			'terms' => 'bangla'
+		),
+		array(
+			'taxonomy' => 'language',
+			'field' => 'slug',
+			'terms' => 'english',
+			'operator' => 'NOT IN'
+		)
+
+	)
+);
+
+$philosophy_posts = new WP_Query( $philosophy_query_args );
+
+while( $philosophy_posts->have_posts() ) {
+	$philosophy_posts->the_post();
+	the_title();
+	echo "<br />";
+}
+
+// Reset to Default Query
+wp_reset_query();
+```
+
+উপরের এই কুয়েরী’র মাধ্যমে **শুধুমাত্র bangla** ল্যাংগুয়েজ টার্ম ব্যবহার করা হয়েছে, এমন বইয়ের লিস্ট দেখাবে।
