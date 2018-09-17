@@ -225,3 +225,44 @@ $philosophy_query_args = array(
 	)
 );
 ```
+
+## ২২.৬ - ট্যাক্সোনমি টার্মের স্লাগ দিয়ে কাস্টম পোস্টের ইউআরএল রিরাইট
+
+আগের ভিডিওতে প্রতিটি বইয়ের সাথে একটি করে genre যুক্ত করা হয়েছিল। কিন্তু, আমাদের বইয়ের url ছিল http://example.com/book/book-name/। কিন্তু, আমার রিকোরমেন্ট হল, বইয়ের নামের আগে url এ genre এর নাম দেখাতে হবে, অর্থাৎ, http://example.com/book/classic/book-name/, এই রকম।
+
+এর জন্য আমি CPT UI মেনু থেকে Add/Edit Post Type এ এসে Books সিলেক্ট করে এর Custom Rewrite Slug এ লিখব, book/%genre%। এবার, url থেকে %genre% কে ডাটাবেজে থাকা আসল genre এর নাম দ্বারা পরিবর্তন করে দিব।
+
+আগের একটি ভিডিওতে আমরা কাস্টম ট্যাক্সোনমির টার্ম chapter এর ক্ষেত্রে তার url থাকা %book% প্লেসহোল্ডারকে ঐ চ্যাপ্টারের parent_book এর নাম দ্বারা প্রতিস্থাপন করেছিলাম। এটি করার জন্য post_type_link ফিল্টার ব্যবহার করা হয়েছিল। ঐ ফিল্টারের কলব্যাক ফাংশনকে ব্যবহার করা হবে।
+
+```php
+function philosophy_cpt_slug_fix( $post_link, $id ) {
+	$p = get_post( $id );
+
+	// Chapter
+	if( is_object( $p ) && ('chapter' == get_post_type( $id ) ) ) {
+		$parent_post_id = get_field( 'parent_book' );
+		$parent_post = get_post( $parent_post_id );
+
+		if( $parent_post ) {
+			$post_link = str_replace( '%book%', $parent_post->post_name, $post_link );
+		}
+	}
+
+	// ২২.৬ - ট্যাক্সোনমি টার্মের স্লাগ দিয়ে কাস্টম পোস্টের ইউআরএল রিরাইট
+	// For book
+	if( is_object( $p ) && 'book' == get_post_type( $id )) {
+		$genre = wp_get_post_terms( $p->ID, 'genre' );
+
+		if( is_array( $genre ) && count( $genre ) > 0 ) {
+			$slug = $genre[0]->slug;
+			$post_link = str_replace( "%genre%", $slug, $post_link );
+		} else {
+			$slug = 'generic';
+			$post_link = str_replace( "%genre%", $slug, $post_link );
+		}
+	}
+
+	return $post_link;
+}
+add_filter( 'post_type_link', 'philosophy_cpt_slug_fix', 1, 2 );
+```
