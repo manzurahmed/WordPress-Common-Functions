@@ -53,3 +53,21 @@ function philosophy_button2( $attributes, $content ) {
 }
 add_shortcode( 'button2', 'philosophy_button2' );
 ```
+
+```
+// প্রথমে ডিফল্ট ভ্যালু সেট করে দিলাম
+	$default = array(
+		'type' => 'primary',
+		'title' => __( 'Button', 'philosophy' ),
+		'url' => ''
+	);
+	// এবার, ইউজার যে সমস্ত প্যারামিটার পাস করেছে, সেগুলোকে ডিফল্ট ভ্যালুর উপরে ওভাররাইট করে দিব
+	// এর জন্য ওয়ার্ডপ্রেসের shortcode_atts ফাংশনটি ব্যবহার করব।
+	$button_attributes = shortcode_atts( $default, $attributes );
+
+	return sprintf('<a target="_blank" class="btn btn--%s full-width" href="%s">%s</a>',
+		$button_attributes['type'],
+		$button_attributes['url'],
+		$button_attributes['title']
+	);
+```
