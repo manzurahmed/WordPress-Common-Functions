@@ -82,3 +82,40 @@ function philosophy_button( $attributes ) {
 }
 add_shortcode( 'button', 'philosophy_button' );
 ```
+
+## ২৩.৪ - শর্টকোড নেস্টিং
+
+একটা শর্টকোডের মধ্যে আরেকটি শর্টকোড ব্যবহার করাকে ‘নেস্টিং’ বলে। এটা বোঝার জন্য এই পর্বে খুব সাধারণ একটি নতুন শর্টকোড বানানো হয়, যার কাজ হল, $content কে ‘বড় হাতে’ (UPPERCASE) দেখানো।
+
+```php
+function philosophy_uppercase( $attributes, $content = '' ) {
+	return strtoupper(
+		do_shortcode( $content )
+	);
+}
+add_shortcode( 'uc', 'philosophy_uppercase' );
+```
+
+এখন এই `uc' শর্টকোর্ডকে যদি আগের পর্বে বানানো **'button2'** শর্টকোডের মধ্যে ব্যবহার করি, তবে দেখা যাবে যে, ওয়েবসাইটে আউটপুটে শর্টকোডটি কাজ করে নাই। শর্টকোডের মধ্যে নেস্টিং আরেকটা শর্টকোড ব্যবহার করলে $content কে do_shortcode ফাংশনের মধ্যে দিয়ে পাস করাতে হবে। অর্থাৎ, $content এর মধ্যে যদি শর্টকোড ব্যবহার করা হয়, তবে সেগুলোকে আগে আউটপুটে নিয়ে এসে তারপর হায়ারারকি’র আগের শর্টকোডকে কার্যকরী করবে।
+
+```php
+function philosophy_button2( $attributes, $content = '' ) {
+
+	// ২৩.৩ - শর্টকোডের ডিফল্ট প্যারামিটার এবং কনটেন্ট
+	// প্রথমে ডিফল্ট ভ্যালু সেট করে দিলাম
+	$default = array(
+		'type' => 'primary',
+		'url' => ''
+	);
+	// এবার, ইউজার যে সমস্ত প্যারামিটার পাস করেছে, সেগুলোকে ডিফল্ট ভ্যালুর উপরে ওভাররাইট করে দিব
+	// এর জন্য ওয়ার্ডপ্রেসের shortcode_atts ফাংশনটি ব্যবহার করব।
+	$button_attributes = shortcode_atts( $default, $attributes );
+
+	return sprintf('<a target="_blank" class="btn btn--%s full-width" href="%s">%s</a>',
+		$button_attributes['type'],
+		$button_attributes['url'],
+		do_shortcode( $content )
+	);
+}
+add_shortcode( 'button2', 'philosophy_button2' );
+```
