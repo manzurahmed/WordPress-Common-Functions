@@ -119,3 +119,7 @@ function philosophy_button2( $attributes, $content = '' ) {
 }
 add_shortcode( 'button2', 'philosophy_button2' );
 ```
+
+### বিশেষ দ্রস্টব্য:
+
+কোন শর্টকোডে প্যারামিটার হিসাবে $content ব্যবহার করা হলে **অবশ্যই** do_shortcode($content) ফাংশন ব্যবহার করতে হবে।
