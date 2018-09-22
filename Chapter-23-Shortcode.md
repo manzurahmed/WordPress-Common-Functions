@@ -54,8 +54,17 @@ function philosophy_button2( $attributes, $content ) {
 add_shortcode( 'button2', 'philosophy_button2' );
 ```
 
+## ২৩.৩ - শর্টকোডের ডিফল্ট প্যারামিটার এবং কনটেন্ট
+
+কমার্শিয়াল প্রতিটি শর্টকোডে কিছু ডিফল্ট প্যারামিটার সেট করে দেয়া থাকে। যেমন: যদি Google map এর জন্য আমি একটি শর্টকোড তৈরী করি, যাতে প্যারামিটার রয়েছে ৪টি, যেমন: latitude, longitude, maptype, এবং, marker। এই ৪টি প্যারামিটারই যদি ম্যানিডিটরী হয়, তবে, শর্টকোড লিখার সময় যদি কোন প্যারামিটার লিখতে ভুলে যায়, তবে পিএইচপি এরর দেখাবে।
+
+এ জন্য শর্টকোড ডিফাইন করার সময় কোডে এই ৪টি প্যারামিটারের ডিফল্ট ভ্যালু সেট করে রাখা হয়, যাতে কোন প্যারামিটার না দিলেও ফলব্যাক হিসাবে ডিফল্ট মানটি ব্যবহৃত হয় এবং পিএইচপি এরর’র হাত থেকে বাঁচা যায়।
+
 ```
-// প্রথমে ডিফল্ট ভ্যালু সেট করে দিলাম
+function philosophy_button( $attributes ) {
+
+	// ২৩.৩ - শর্টকোডের ডিফল্ট প্যারামিটার এবং কনটেন্ট
+	// প্রথমে ডিফল্ট ভ্যালু সেট করে দিলাম
 	$default = array(
 		'type' => 'primary',
 		'title' => __( 'Button', 'philosophy' ),
@@ -70,4 +79,6 @@ add_shortcode( 'button2', 'philosophy_button2' );
 		$button_attributes['url'],
 		$button_attributes['title']
 	);
+}
+add_shortcode( 'button', 'philosophy_button' );
 ```
