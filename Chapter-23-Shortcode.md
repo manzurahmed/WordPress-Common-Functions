@@ -123,3 +123,38 @@ add_shortcode( 'button2', 'philosophy_button2' );
 ### বিশেষ দ্রস্টব্য:
 
 কোন শর্টকোডে প্যারামিটার হিসাবে $content ব্যবহার করা হলে **অবশ্যই** do_shortcode($content) ফাংশন ব্যবহার করতে হবে।
+
+## ২৩.৫ - গুগল ম্যাপস শর্টকোড
+
+এই ভিডিওতে গুগল ম্যাপের জন্য একটা শর্টকোড তৈরী করার পদ্ধতি দেখানো হয়। এখানে গুগল ম্যাপকে এমবেড করা হয়েছে। যে কারণে গুগল ম্যাপস এর কোন এপিআই লাগবে না।
+
+পোস্টের মধ্যে [gmap] শর্টকোড লিখলেই ওয়েবসাইটে একটি গুগল ম্যাপ দেখাবে। শর্টকোডটিতে place, zoom, width, height - এই ৪টি ডিফল্ট প্যারামিটার ব্যবহার করা হয়েছে। gmap শর্টকোডের সাথে ৪টি প্যারামিটারের মধ্যে যে কোন সংখ্যায় প্যারামিটার লিখলেই হবে। যেমন: [gmap place="Dhaka" width="100%" height="200" zoom=13]
+
+```php
+function philosophy_google_map( $attributes ) {
+	$default = array(
+		'place' => 'Dhaka Museum',
+		'zoom' => 13,
+		'width' => 800,
+		'height' => 500
+	);
+
+	$params = shortcode_atts( $default, $attributes );
+
+	// heredoc
+	$map =
+<<<EOD
+<div>
+	<div>
+		<iframe width="{$params['width']}" height="{$params['height']}"
+			src="https://maps.google.com/maps?q={$params['place']}&t=&z={$params['zoom']}&ie=UTF8&iwloc=&output=embed"
+			frameborder="0" scrolling="no" margineheight="0" marginwidth="0">
+		</iframe>
+	</div>
+</div>
+EOD;
+
+	return $map;
+}
+add_shortcode( 'gmap', 'philosophy_google_map' );
+```
