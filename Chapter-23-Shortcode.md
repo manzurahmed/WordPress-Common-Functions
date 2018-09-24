@@ -158,3 +158,52 @@ EOD;
 }
 add_shortcode( 'gmap', 'philosophy_google_map' );
 ```
+
+## ২৩.৬ - শর্টকোডের UI বিল্ডার এবং ওয়ার্ডপ্রেসের এডিটরের মাঝেই শর্টকোডের ভিজ্যুয়াল আউটপুট দেখা
+
+এডিটরে শর্টকোড লেখার পর তার ভিজ্যুয়াল এ্যাপিয়ারেন্স ওয়েবসাইটে দেখায়। কিন্তু, এডিটরে শর্টকোডের ভিজ্যুয়াল দেখতে চাইলে "Shortcake (Shortcode UI)" নামের প্লাগ-ইন ইন্সটল করতে হবে। এই প্লাগইন ইন্সটল করলে register_shortcode_ui নামে Shortcake এর একটা হুক ব্যবহার করতে পারব।
+
+এরপর আমার থিমের প্লাগ-ইন ফোল্ডার "philosophy-companion" এর মধ্যে gmap_ui.php ফাইল তৈরী করে তার মধ্যে নীচের কোডগুলো লিখতে হবে। তারপর, philosophy-companion.php ফাইলের একদম উপরে এই gmap_ui.php ফাইলটি require_once দিয়ে যুক্ত করে নিতে হবে।
+
+```php
+function philosophy_google_map_ui() {
+	$fields = array(
+		array(
+			'label' => __( 'Place', 'philosophy' ),
+			'attr' => 'place',
+			'type' => 'text'
+		),
+		array(
+			'label' => __( 'Width', 'philosophy' ),
+			'attr' => 'width',
+			'type' => 'text'
+		),
+		array(
+			'label' => __( 'Height', 'philosophy' ),
+			'attr' => 'height',
+			'type' => 'text'
+		),
+		array(
+			'label' => __( 'Zoom', 'philosophy' ),
+			'attr' => 'zoom',
+			'type' => 'text'
+		)
+	);
+
+	$settings = array(
+		'label' => __( 'Google Map', 'philosophy' ),
+		'listItemImage' => 'dashicons-admin-site',
+		'post_type' => array( 'post', 'page' ),
+		'attrs' => $fields
+	);
+
+	shortcode_ui_register_for_shortcode( 'gmap', $settings );
+}
+add_action( 'register_shortcode_ui', 'philosophy_google_map_ui');
+```
+
+**বিশেষ দ্রষ্টব্য:**
+
+এডিটরে শর্টকোড লেখার পর তা ভিজ্যুয়ালি দেখতে চাইলে **অবশ্যই** "Visual” মুডে থাকতে হবে। "Text" মুডে থাকলে শর্টকোডের ভিজ্যুয়াল দেখাবে না।
+
+Shortcake প্লাগইন ইন্সটল করার পর প্রয়োজনীয় কোড লেখা সম্পন্ন হলে আমি এবার ইডিটরে দিয়ে একটা পোস্টে শর্টকোড লিখব। খেয়াল কর, এডিটরের উপরে "Add Media" বাটনের পাশে "Add Post Element" নামে নতুন আরেকটি বাটন এসেছে। এই বাটনে ক্লিক করে আমার প্রস্তুতকৃত শর্টকোডগুলো ইউ.আই. দিয়ে ইনপুট দিতে পারব।
