@@ -29,6 +29,7 @@
 10. Post Meta Inspector: https://wordpress.org/plugins/post-meta-inspector/
 11. Contact Form 7: https://wordpress.org/plugins/contact-form-7/
 12. Custom Post Type UI by Webdev Studios: https://wordpress.org/plugins/custom-post-type-ui/
+13. Shortcake (Shortcode UI Builder): https://wordpress.org/plugins/shortcode-ui/
 
 ### Other Resources
 
