@@ -97,3 +97,103 @@ if( $philosophy_cs_page_meta['is-favorite'] ) {
 }
 ?>
 ```
+
+## ২৪.৩ - কোডস্টার ফ্রেমওয়ার্কের ফিল্ড ডিপেন্ডেন্সি (খুবই ইন্টারেস্টিং)
+
+কোডস্টার ফ্রেমওয়ার্কের “ডিপেনডেনসি” একটি অত্যান্ত শক্তিশালী ফিচার। কোডস্টারের মেটাবক্স ব্যবহার করে পেজ, পোস্ট, অপশন প্যানেল, ট্যাক্সোনমি, কাস্টোমাইজার - বিভিন্ন স্থানে ইউজারদেরকে অপশন কন্ট্রোল প্যানেল তৈরী করে দেয়া যায়।
+
+অপশন প্যানেলে টেক্সট বক্স, চেকবক্স, সুইচার, রেডিও বাটন, ড্রপডাউন, প্রভৃতি থাকতে পারে। এদের এক বা একাধিক কন্ট্রোলের ভ্যালুর উপরে ভিত্তি করে আরেকটি কন্ট্রোলকে show বা hide করতে “ডিপেনডেনসি” ব্যবহার করা হয়।
+
+উদাহরণ হিসাবে ধরা যায় যে, আমার "Is Favorite" সুইচার বাটন এবং "Favorite Text" নামে টেক্সবক্স আছে। "Is Favorite" সুইচার বাটনকে ক্লিক করলেই কেবল "Favorite Text" টেক্সটবক্সটি দেখাবে। অন্যথায় দেখাবে না। এ ক্ষেত্রে নিচের কোড লিখতে হবে:
+
+```php
+array(
+	'id' => 'is-favorite',
+	'type' => 'switcher', // Codestar type
+	'title' => __( 'Is Favorite', 'philosophy'),
+	'default' => 1
+),
+// FOR SINGLE DEPENDENCY, USE THIS
+array(
+	'id' => 'page-favorite-text',
+	'type' => 'text', // Codestar type
+	'title' => __( 'Favorite Text', 'philosophy'),
+	'dependency' => array(
+		'is-favorite',
+		'==',
+		'1'
+	)
+),
+```
+
+**২টা সুইচারের ভ্যালুর উপরে ভিত্তি করে টেক্সটবক্স দেখানো**
+
+যদি ২টা কন্ট্রোলের ভ্যালুর উপরে "Favorite Text" কে দেখাতে হয়, তখন ডিপেনডেনসি চেক করার পদ্ধতিটি খুব সহজ। ধরি, "Is Favorite" সুইচার বাটন এর নীচে "Is Favorite Extra" নামে আরেকটা সুইচার বাটন তৈরী করা হল। এই দু’টো বাটন **একসাথে সিলেক্ট** করলেই কেবল "Favorite Text" টেক্সটবক্স দেখা যাবে। এ ক্ষেত্রে কোড হবে নিম্নরূপ:
+
+```php
+// FOR MULTIPLE DEPENDENCY, USE THIS
+array(
+	'id' => 'page-favorite-text',
+	'type' => 'text', // Codestar type
+	'title' => __( 'Favorite Text', 'philosophy'),
+	'dependency' => array(
+		'is-favorite|is-favorite-extra',
+		'==|==',
+		'1|1'
+	)
+),
+```
+
+**Checkbox ২টা অপশনের উপর ভিত্তি করে টেক্সটবক্স দেখানো**
+
+ধরি, ভাষা সিলেক্ট করার একটি চেকবক্স আছে, যাতে ৩টা ভাষার অপশন আছে, bangla, english এবং french। “একসাথে বাংলা ও ইংরেজী” ভাষা দু’টো সিলেক্ট করলে “extra-language-data” নামের একটি টেক্সটবক্স দেখাবে। এ ক্ষেত্রে কোড হবে:
+
+```php
+// Checkbox
+array(
+	'id' => 'support-language',
+	'type' => 'checkbox',
+	'title' => __( 'Languages', 'philosophy' ),
+	'options' => array(
+		'bangla' => 'Bangla',
+		'english' => 'English',
+		'french' => 'French'
+	)
+),
+array(
+	'id' => 'extra-language-data',
+	'type' => 'text', // Codestar type
+	'title' => __( 'Extra Language Data', 'philosophy'),
+	'dependency' => array(
+		'support-language_bangla|support-language_english',
+		'==|==',
+		'1|1'
+	)
+),
+```
+
+কিন্তু, যদি bangla ও english - যে কোন ১টা ভাষা সিলেক্ট করলে টেক্সটবক্সটা দেখাবে, সে ক্ষেত্রে কোডস্টারের কোডের স্টাইল একটু ভিন্ন:
+
+```php
+// আর, যে কোন ১টা ভাষা সিলেক্ট করলেই টেক্সটবক্স দেখাবে
+array(
+	'id' => 'support-language',
+	'type' => 'checkbox',
+	'title' => __( 'Languages', 'philosophy' ),
+	'options' => array(
+		'bangla' => 'Bangla',
+		'english' => 'English',
+		'french' => 'French'
+	),
+	// 'any' ব্যবহার করলে এই 'attributes' প্যারামিটার ব্যবহার করতে হবে
+	'attributes' => array(
+		'data-depend-id' => 'support-language'
+	)
+),
+array(
+	'id' => 'extra-language-data',
+	'type' => 'text', // Codestar type
+	'title' => __( 'Extra Language Data', 'philosophy'),
+	'dependency' => array( 'support-language','any','bangla, english' )
+),
+```
