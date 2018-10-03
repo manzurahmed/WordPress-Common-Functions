@@ -206,23 +206,24 @@ array(
 
 ```php
 // This condition checks which Admin Section I am now
-	if( isset( $_REQUEST['post'] ) || isset( $_REQUEST['post_ID'] ) ) {
-		$page_id = empty( $_REQUEST['post_ID'] ) ? $_REQUEST['post'] : $_REQUEST['post_ID'];
-	}
-	// Now, get the Currently Assigned "Page Template" of this page
-	$current_page_template = get_post_meta( $page_id, '_wp_page_template', true );
-	// echo $current_page_template;
-	// wp_die();
+$page_id = 0; // Must initialize this value to "0". Otherwise, an PHP error will occur when I navigate to other section of WordPress Admin area.
+if( isset( $_REQUEST['post'] ) || isset( $_REQUEST['post_ID'] ) ) {
+	$page_id = empty( $_REQUEST['post_ID'] ) ? $_REQUEST['post'] : $_REQUEST['post_ID'];
+}
+// Now, get the Currently Assigned "Page Template" of this page
+$current_page_template = get_post_meta( $page_id, '_wp_page_template', true );
+// echo $current_page_template;
+// wp_die();
 
-	if( 'about.php' != $current_page_template ) {
-		return $options;
-	}
+if( 'about.php' != $current_page_template ) {
+	return $options;
+}
 ```
 
 কিন্তু, যদি একাধিক পেজ টেমপ্লেটের উপস্থিতি চেক করে দেখতে চাই, তবে, in_array ফাংশন ব্যবহার করে একাধিক টেমপ্লেটের নাম আর্গুমেন্ট আকারে পাঠিয়ে চেক করতে হবে।
 
 ```php
 if( !in_array( $current_page_template, array( 'about.php', 'contact.php' ) ) ) {
-		return $options;
-	}
+	return $options;
+}
 ```
