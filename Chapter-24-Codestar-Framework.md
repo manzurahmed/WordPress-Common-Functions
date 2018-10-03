@@ -197,3 +197,32 @@ array(
 	'dependency' => array( 'support-language','any','bangla, english' )
 ),
 ```
+
+## ২৪.৪ - বিভিন্ন কন্ডিশনের উপরে ভিত্তি করে কোডস্টার মেটাবক্সগুলো দেখানো
+
+কোডস্টার দিয়ে বানানো কোন একটি মেটাবক্স যদি পোস্ট বা পেজ এর বানানো হয়, তবে সেই মেটাবক্স সব পোস্ট বা পেজ এ দেখায়। এটাই **ডিফল্ট বিহ্যাভিওর**।
+
+কিন্তু, যদি কোন একটি মেটাবক্সকে যদি নির্দিষ্ট কোন পোস্ট, বা, পেজে, বা, পেজের নির্দিষ্ট কোন টেমপ্লেটে দেখাতে চাই, তাহলে থিমের inc ফোল্ডারের cs.php ফাইলের ফাংশন philosophy_page_metebox($options) এর মধ্যে চেক করে দেখতে হবে, আমি এ্যাডমিনে কোন সেকশনে আছি, পেজ এডিটিং এ, নাকি, পোস্ট এডিটিং এ। একই সাথে চেক করে দেখতে হবে যে, আমি যে পেজে আছি সেই পেজের সাথে বর্তমানে কোন টেমপ্লেটা এ্যাসাইন করা আছে।
+
+```php
+// This condition checks which Admin Section I am now
+	if( isset( $_REQUEST['post'] ) || isset( $_REQUEST['post_ID'] ) ) {
+		$page_id = empty( $_REQUEST['post_ID'] ) ? $_REQUEST['post'] : $_REQUEST['post_ID'];
+	}
+	// Now, get the Currently Assigned "Page Template" of this page
+	$current_page_template = get_post_meta( $page_id, '_wp_page_template', true );
+	// echo $current_page_template;
+	// wp_die();
+
+	if( 'about.php' != $current_page_template ) {
+		return $options;
+	}
+```
+
+কিন্তু, যদি একাধিক পেজ টেমপ্লেটের উপস্থিতি চেক করে দেখতে চাই, তবে, in_array ফাংশন ব্যবহার করে একাধিক টেমপ্লেটের নাম আর্গুমেন্ট আকারে পাঠিয়ে চেক করতে হবে।
+
+```php
+if( !in_array( $current_page_template, array( 'about.php', 'contact.php' ) ) ) {
+		return $options;
+	}
+```
