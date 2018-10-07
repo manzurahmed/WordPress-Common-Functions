@@ -41,3 +41,7 @@
 ### jQuery Plugin Resources
 1. FeatherLight Popup: https://noelboss.github.io/featherlight/
 2. Tiny Slider: https://github.com/ganlanyuan/tiny-slider
+
+### VisualStudio Code, Sublime Text, Atom Snippet Generator
+
+https://snippet-generator.app/?description=&tabtrigger=&snippet=&mode=vscode
