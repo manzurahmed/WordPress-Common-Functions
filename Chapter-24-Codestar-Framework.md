@@ -227,3 +227,79 @@ if( !in_array( $current_page_template, array( 'about.php', 'contact.php' ) ) ) {
 	return $options;
 }
 ```
+
+## ২৪.৫ - কোডস্টার ফ্রেমওয়ার্কের আপলোড ফিল্ড এবং ইমেজ ফিল্ড
+
+এই পর্বে কোডস্টার ফ্রেমওয়ার্কে upload এবং image ফিল্ড এর ব্যবহার দেখানো হয়েছে।
+
+- upload - পিডিএফ, বা, ভিডিও, অডিও আপলোড করার জন্য এই ফিল্ড টাইপ ব্যবহার করা হয়।
+- image - ছবি বা ইমেজ আপলোড করার জন্য এই ফিল্ড টাইপ ব্যবহার করা হয়।
+
+upload ফিল্ড টাইপ থেকে যেটা আপলোড করা হয়েছে, তার সম্পূর্ণ url রিটার্ন করে ( http://localhost/alpha/wp-content/uploads/2018/10/Orygami-f14a_inst.pdf)। 
+image ফিল্ড টাইপ থেকে ইমেজের ID রিটার্ন করে। এই আইডি ব্যবহার করে wp_get_attachment_image ফাংশন দিয়ে ইমেজকে গ্রাফিকালি দেখানো যায়। আর, যদি ইমেজের url প্রয়োজন হয়, তবে wp_get_attachment_image_src ফাংশন ব্যবহার করতে হবে।
+
+প্রথমে cs.php ফাইলে আরেকটি add_filter ব্যবহার করে নতুন মেটাবক্স বানাব।
+
+```php
+function philosophy_upload_metabox( $options ) {
+	
+	$options[] = array(
+		'id' => 'page-upload-metabox',
+		'title' => __( 'Upload files', 'philosophy' ),
+		'post_type' => 'page',
+		'context' => 'normal',
+		'priority' => 'default',
+		'sections' => array(
+			array(
+				'name' => 'page-section1',
+				'title' => __( 'Upload Files', 'philosophy' ),
+				'icon' => 'fa fa-image',
+				'fields' => array(
+
+					// Upload
+					// http://codestarframework.com/documentation/#upload
+					array(
+						'id'            => 'page-upload',
+						'type'          => 'upload',
+						'title'         => __( 'Upload PDF', 'philosophy' ),
+						'settings'      => array(
+							'upload_type'  => 'application/pdf',
+							'button_title' => __( 'Upload', 'philosophy' ),
+							'frame_title'  => __( 'Select an PDF', 'philosophy' ),
+							'insert_title' => __( 'Use this PDF', 'philosophy' ),
+						)
+					),
+					array(
+						'id'            => 'page-image',
+						'type'          => 'image',
+						'title'         => __( 'Upload Image', 'philosophy' ),
+						'add_title'		=> __( 'Add an Image', 'philosophy' )
+					)
+				)
+			)
+		)
+	);
+
+	return $options;
+}
+add_filter( 'cs_metabox_options', 'philosophy_upload_metabox' );
+```
+
+কোডস্টারের upload এবং image ফিল্ড টাইপের ব্যবহার দেখানার জন্য আলাদা নুতন একটি পেজ তৈরী করা হয় এবং এর আউটপুটকে আলাদাভাবে দেখানোর জন্য স্পেসিফিক একটা php ফাইল তৈরী করা হয়। নতুন পেজের permalink এর address ছিল "codestar-upload-example"। তাই, page-codestar-upload-example.php নামে একটি ফাইল তৈরী করে তার মধ্যে page.php ফাইল এর কনটেন্ট পেস্ট করে নিব।
+
+upload ফিল্ড টাইপের ডাটা মেটাবক্স থেকে পুল করে আনতে নিচের কোড ব্যবহার করব:
+
+```php
+$philosophy_page_meta = get_post_meta( get_the_ID(), 'page-upload-metabox', true );
+print_r( $philosophy_page_meta['page-upload'] );
+```
+
+আর, image ফিল্ডের ডাটা পুল করার জন্য নিচের কোড ব্যবহার করব।:
+
+```php
+print_r( $philosophy_page_meta['page-image'] );
+                echo '<br />';
+                echo wp_get_attachment_image( $philosophy_page_meta['page-image'], 'medium' );
+                echo '<br />';
+                echo wp_get_attachment_image_src( $philosophy_page_meta['page-image'], 'medium' )[0];
+```
