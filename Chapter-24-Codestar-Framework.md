@@ -304,10 +304,48 @@ print_r( $philosophy_page_meta['page-image'] );
                 echo wp_get_attachment_image_src( $philosophy_page_meta['page-image'], 'medium' )[0];
 ```
 
-# ২৪.৬ - কোডস্টার ফ্রেমওয়ার্কের গ্যালারী ফিল্ড
+## ২৪.৬ - কোডস্টার ফ্রেমওয়ার্কের গ্যালারী ফিল্ড
 
-এই পর্বে কোডস্টার ফ্রেমওয়ার্কের গ্যালারী ফিল্ড টাইপের ব্যবহার দেখানো হয়েছে। আগের টিউটোরিয়ালে ব্যবহার করা ইমেজ ফিল্ডের নীচে গ্যালারী ফিল্ড ব্যবহার করা হয়। এই ফিল্ডের মাধ্যমে একাধিক ইমেজ ব্যবহার করা যায়।
+এই পর্বে কোডস্টার ফ্রেমওয়ার্কের গ্যালারী ফিল্ড টাইপের ব্যবহার দেখানো হয়েছে। আগের টিউটোরিয়ালে ব্যবহার করা ইমেজ ফিল্ডের নীচে গ্যালারী ফিল্ড ব্যবহার করা হয়। এই ফিল্ডের মাধ্যমে একাধিক ইমেজ ব্যবহার করা যায়। একবার এ্যাড করার পর "Add Images" বাটন দিয়ে গ্যালারীতে নতুন ইমেজ যুক্ত করা যাবে। "Edit images" বাটন ব্যবহার করে গ্যালারীর ইমেজগুলোকে ড্র্যাগ করে রিঅ্যারাঞ্জ করা যাবে।
 
 ![Codestar Framework Gallery Field Style](https://github.com/manzurahmed/WordPress-Common-Functions/blob/master/images/chapter-24/codestar-gallery-field-type.jpg)
 
+গ্যালারী ফিল্ডের জন্য cs.php ফাইলে philosophy_upload_metabox ফাংশনের মধ্যে নীচের কোডগুলো লিখতে হবে:
+
+```php
+array(
+						'id'          => 'page-gallery',
+						'type'        => 'gallery',
+						'title'       => __( 'Upload Image', 'philosophy' ),
+						'add_title'   => __( 'Add Images', 'philosophy' ),
+						'edit_title'  => __( 'Edit Images', 'philosophy' ),
+						'clear_title' => __( 'Clear Gallery', 'philosophy' ),
+					),
+```
+
+ওয়ার্ডপ্রেস এ্যাডমিন প্যানেল থেকে গ্যালারী ফিল্ডে কিছু ইমেজ যুক্ত করে ওয়েবসাইটে দেখানো জন্য page-codestar-upload-example.php ফাইলে নীচের কোডগুলো যুক্ত করি। ইমেজগুলোকে TinySlider লাইব্রেরী ব্যবহার করে দেখানো হয়েছে (যদিও সিএসএস ঠিক করা হয়নি)।
+
+```php
+if( !empty( $philosophy_page_meta['page-gallery'] ) ) {
+                    $philosophy_gallery_ids = explode( ",", $philosophy_page_meta['page-gallery'] );
+
+                    // Tiny Sider
+                    // https://github.com/ganlanyuan/tiny-slider
+                    ?>
+                    <div class="my-slider">
+                    <?php
+                    foreach( $philosophy_gallery_ids as $philosophy_gallery_id ) { ?>
+                        <div>
+                            <a href="#">
+                                <?php echo wp_get_attachment_image( $philosophy_gallery_id, 'large' ); ?>
+                            </a>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                    </div>
+                <?php
+                }
+                ?>
+```
 
