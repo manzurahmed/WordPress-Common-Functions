@@ -349,3 +349,34 @@ if( !empty( $philosophy_page_meta['page-gallery'] ) ) {
 ?>
 ```
 
+## ২৪.৭ - কোডস্টার ফ্রেমওয়ার্কের ফিল্ডসেট ফিল্ড
+
+ফিল্ডসেট হলো, একই টাইপের ফিল্ডগুলোকে গ্রুপ করার একটি HTML ট্যাগ। এই ভিডিও কোডস্টারের ডকুমেন্টেশন থেকে ফিল্ডসেটের ডিফল্ট কোড ব্যবহার করা হয়েছে, তবে, আপলোড ফিল্ডটা কেটে দেয়া হয়। print_r ব্যবহার করে দেখতে পাই যে, ফিল্ডসেট array আকারে এর ভ্যালুগুলো রিটার্ন করে।
+
+![Fieldset fieldtype](https://github.com/manzurahmed/WordPress-Common-Functions/blob/master/images/chapter-24/codestar-fieldset-fieldtype.jpg)
+
+```php
+array(
+						'id'        => 'fieldset_1',
+						'type'      => 'fieldset',
+						'title'     => 'Fieldset Field',
+						'fields'    => array(
+						  array(
+							'id'    => 'fieldset_1_text',
+							'type'  => 'text',
+							'title' => 'Text Field',
+						  ),
+						  array(
+							'id'    => 'fieldset_1_textarea',
+							'type'  => 'textarea',
+							'title' => 'Textarea Field',
+						  ),
+						),
+					),
+```
+
+এই এ্যারে থেকে যে কোন একটি ভ্যালু পেতে হলে, এ্যারের এলিমেন্ট ধরে কল করতে হবে, যেমন:
+
+```php
+echo $philosophy_page_meta['fieldset_1']['fieldset_1_text'];
+```
