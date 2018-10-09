@@ -357,22 +357,22 @@ if( !empty( $philosophy_page_meta['page-gallery'] ) ) {
 
 ```php
 array(
-						'id'        => 'fieldset_1',
-						'type'      => 'fieldset',
-						'title'     => 'Fieldset Field',
-						'fields'    => array(
-						  array(
-							'id'    => 'fieldset_1_text',
-							'type'  => 'text',
-							'title' => 'Text Field',
-						  ),
-						  array(
-							'id'    => 'fieldset_1_textarea',
-							'type'  => 'textarea',
-							'title' => 'Textarea Field',
-						  ),
-						),
-					),
+	'id'        => 'fieldset_1',
+	'type'      => 'fieldset',
+	'title'     => 'Fieldset Field',
+	'fields'    => array(
+	  array(
+		'id'    => 'fieldset_1_text',
+		'type'  => 'text',
+		'title' => 'Text Field',
+	  ),
+	  array(
+		'id'    => 'fieldset_1_textarea',
+		'type'  => 'textarea',
+		'title' => 'Textarea Field',
+	  ),
+	),
+),
 ```
 
 এই এ্যারে থেকে যে কোন একটি ভ্যালু পেতে হলে, এ্যারের এলিমেন্ট ধরে কল করতে হবে, যেমন:
