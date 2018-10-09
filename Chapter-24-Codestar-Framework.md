@@ -327,25 +327,25 @@ array(
 
 ```php
 if( !empty( $philosophy_page_meta['page-gallery'] ) ) {
-                    $philosophy_gallery_ids = explode( ",", $philosophy_page_meta['page-gallery'] );
+    $philosophy_gallery_ids = explode( ",", $philosophy_page_meta['page-gallery'] );
 
-                    // Tiny Sider
-                    // https://github.com/ganlanyuan/tiny-slider
-                    ?>
-                    <div class="my-slider">
-                    <?php
-                    foreach( $philosophy_gallery_ids as $philosophy_gallery_id ) { ?>
-                        <div>
-                            <a href="#">
-                                <?php echo wp_get_attachment_image( $philosophy_gallery_id, 'large' ); ?>
-                            </a>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                    </div>
-                <?php
-                }
-                ?>
+    // Tiny Sider
+    // https://github.com/ganlanyuan/tiny-slider
+    ?>
+    <div class="my-slider">
+    <?php
+    foreach( $philosophy_gallery_ids as $philosophy_gallery_id ) { ?>
+	<div>
+	    <a href="#">
+		<?php echo wp_get_attachment_image( $philosophy_gallery_id, 'large' ); ?>
+	    </a>
+	</div>
+    <?php
+    }
+    ?>
+    </div>
+<?php
+}
+?>
 ```
 
