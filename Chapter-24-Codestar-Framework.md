@@ -303,3 +303,11 @@ print_r( $philosophy_page_meta['page-image'] );
                 echo '<br />';
                 echo wp_get_attachment_image_src( $philosophy_page_meta['page-image'], 'medium' )[0];
 ```
+
+# ২৪.৬ - কোডস্টার ফ্রেমওয়ার্কের গ্যালারী ফিল্ড
+
+এই পর্বে কোডস্টার ফ্রেমওয়ার্কের গ্যালারী ফিল্ড টাইপের ব্যবহার দেখানো হয়েছে। আগের টিউটোরিয়ালে ব্যবহার করা ইমেজ ফিল্ডের নীচে গ্যালারী ফিল্ড ব্যবহার করা হয়। এই ফিল্ডের মাধ্যমে একাধিক ইমেজ ব্যবহার করা যায়।
+
+![Codestar Framework Gallery Field Style](https://github.com/manzurahmed/WordPress-Common-Functions/blob/master/images/chapter-24/codestar-gallery-field-type.jpg)
+
+
