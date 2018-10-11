@@ -380,3 +380,78 @@ array(
 ```php
 echo $philosophy_page_meta['fieldset_1']['fieldset_1_text'];
 ```
+
+# ২৪.৮ - কোডস্টার ফ্রেমওয়ার্কের রিপিটেবল গ্রুপ ফিল্ড এবং কিছু ট্রিকস
+
+কোডস্টারের group ফিল্ড টাইপ দিয়ে যে কোন ফিল্ডকে রিপিট করা যায়। যেমন: টেসটিমোনিয়াল এ একই ধরণের তথ্য একাধিক নেয়ার দরকার হয়। এর ইনপুট নেয়ার জন্য গ্রুপ ফিল্ড ব্যবহার করা যায়। এই ভিডিওতে কোডস্টারের উদাহরণে থাকা কোড নিয়ে গ্রুপ ফিল্ডকে দেখানো হয়েছে।
+
+```
+array(
+  'id'              => 'unique_option_901',
+  'type'            => 'group',
+  'title'           => 'Group Field',
+  'button_title'    => 'Add New',
+  'accordion_title' => 'Add New Field',
+  'fields'          => array(
+    array(
+      'id'    => 'unique_option_901_text_1',
+      'type'  => 'text',
+      'title' => 'Text Field 100',
+    ),
+    array(
+      'id'    => 'unique_option_901_upload_1',
+      'type'  => 'upload',
+      'title' => 'Upload Field',
+    ),
+    array(
+      'id'    => 'unique_option_901_switcher_1',
+      'type'  => 'switcher',
+      'title' => 'Switcher Field',
+    ),
+  ),
+),
+```
+
+পরে, কোডস্টারের ডিফল্ট উদাহরণের কোড মুছে নতুন করে একটি গ্রুপ ফিল্ডের কোড লেখা হয়, যেখানে একটি select ফিল্ডকে রিপিট করা হয় এবং সেখানে প্রতিটি পেজের লিস্ট দেখাবে। **এখানে একটু বুঝতে হবে, কি করা হয়েছে**
+
+```php
+'fields'          => array(
+	array(
+		'id' => 'featured_posts',
+		'type' => 'select',
+		'title' => __( 'Select a page', 'philosophy' ),
+		'options' => 'pages'
+	)
+),
+```
+
+এই মেটাবক্সটি পরীক্ষা করার জন্য এ্যাডমিনে গিয়ে CodeStar Upload Example পেজটি রিফ্রেস করে group ফিল্ডে ৩/৪ টা এন্ট্রি দিয়ে পেজ আপডেট (সেভ) করে দিব। এতে দেখা যাবে, গ্রুপ ফিল্ডে মেটাবক্সের টাইটেল হিসাবে মেটাবক্সের আইডি দেখাচ্ছে।
+
+![Codestar metabox group field: Metabox ID as title](https://github.com/manzurahmed/WordPress-Common-Functions/blob/master/images/chapter-24/Group%20field%20with%20id%20as%20title.jpg)
+
+কিন্তু, টাইটেল হিসাবে পেজের বা পোস্টের বা কাস্টম পোস্টের টাইটেল দেখালে ব্যবহারকারীর জন্য সুবিধা হবে। এ জন্য কোডস্টারের group.php ফাইলের ৫৮ নম্বর লাইনে ৩টা লাইন যুক্ত করা হয়েছে। ফাইল লোকেশন: "lib/cs-framework/fields/group/group.php"।
+
+```php
+if( $field_id == 'featured_posts' ) {
+    $title = get_the_title( $this->value[$key][$field_id] );
+  }
+```
+
+পরবর্তীতে, পেজের লিস্টের পরবর্তীতে book এর লিস্ট দেখানো হয়। কোডস্টারের ডকুমেন্টেশনে select ফিল্ডের জন্য কিভাবে কুয়েরী পাস করতে হয়, সেটা বলে দেয়া আছে।
+
+```php
+array(
+	'id' => 'featured_posts',
+	'type' => 'select',
+	'title' => __( 'Select a page', 'philosophy' ),
+	'options' => 'posts',
+	'query_args'     => array(
+		'post_type'    => 'book',
+		'posts_per_page' => -1,
+		'orderby'      => 'post_date',
+		'order'        => 'DESC',
+	),
+)
+```
+
+![Codestar metabox group field: Post title as title](https://github.com/manzurahmed/WordPress-Common-Functions/blob/master/images/chapter-24/group%20field%20with%20post%20title%20as%20title.jpg)
