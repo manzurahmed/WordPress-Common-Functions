@@ -429,7 +429,7 @@ array(
 
 ![Codestar metabox group field: Metabox ID as title](https://github.com/manzurahmed/WordPress-Common-Functions/blob/master/images/chapter-24/Group%20field%20with%20id%20as%20title.jpg)
 
-কিন্তু, টাইটেল হিসাবে পেজের বা পোস্টের বা কাস্টম পোস্টের টাইটেল দেখালে ব্যবহারকারীর জন্য সুবিধা হবে। এ জন্য কোডস্টারের group.php ফাইলের ৫৮ নম্বর লাইনে ৩টা লাইন যুক্ত করা হয়েছে। ফাইল লোকেশন: "lib/cs-framework/fields/group/group.php"।
+কিন্তু, টাইটেল হিসাবে পেজের বা পোস্টের বা কাস্টম পোস্টের টাইটেল দেখালে ব্যবহারকারীর জন্য সুবিধা হবে। এ জন্য কোডস্টারের group.php ফাইল **মডিিই** করা হয়েছে। ফাইলের ৫৮ নম্বর লাইনে ৩টা লাইন যুক্ত করা হয়েছে। ফাইল লোকেশন: "lib/cs-framework/fields/group/group.php"।
 
 ```php
 if( $field_id == 'featured_posts' ) {
