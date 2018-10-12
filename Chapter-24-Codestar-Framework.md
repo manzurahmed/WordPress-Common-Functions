@@ -455,3 +455,115 @@ array(
 ```
 
 ![Codestar metabox group field: Post title as title](https://github.com/manzurahmed/WordPress-Common-Functions/blob/master/images/chapter-24/group%20field%20with%20post%20title%20as%20title.jpg)
+
+## ২৪.৯ - আরো অ্যাডভান্সড কন্ডিশনের উপরে ভিত্তি করে কোডস্টার মেটাবক্স ডিসপ্লে করা
+
+বিভিন্ন কন্ডিশনের উপরে ভিত্তি করে মেটাবক্স কিভাবে দেখানো হয়, এই পর্বে তা দেখানো হয়েছে। এই পর্বে কোডস্টার দিয়ে একটা আলাদা মেটাবক্স বানানো হয়, যেখানে ৩টি ইনপুট ফিল্ড থাকে। এক নম্বরে রয়েছে, আগের পর্বে বানানো একটি সিলেক্ট বক্সে কাস্টম পোস্ট টাইপগুলো। Book এবং Chapter। বুক সিলেক্ট করলে বুকের জন্য অপশন ফিল্ডটি দেখাবে। আর, চ্যাপ্টার সিলেক্ট করলে, চ্যাপ্টারের জন্য বানানো অপশন ফিল্ডটি দেখাবে।
+
+উল্লেখ্য, বুক বা চ্যাপ্টার সিলেক্ট করার পর আমাদের উদাহরণের জন্য বানানো পেজটা সেভ করার পর তাদের সাথে সংশ্লিষ্ট অপশন ফিল্ডটি দেখাবে।
+
+এখানে, আগে $page_id বের করে নেয়া হচ্ছে। তারপর $page_meta_info বের করে নিয়ে, তার উপরে ভিত্তি করে সংশ্লিষ্ট অপশন ফিল্ডটি দেখানো হচ্ছে। **খুব সিম্পল একটা ব্যাপার। জানতে সহজ, না পারলে প্যারা।**
+
+কোড উদাহরণ:
+
+```php
+// ২৪.৯ - আরো অ্যাডভান্সড কন্ডিশনের উপরে ভিত্তি করে কোডস্টার মেটাবক্স ডিসপ্লে করা
+function philosophy_custom_post_types( $options ) {
+
+	// This condition checks which Admin Section I am now
+	$page_id = 0;
+	if( isset( $_REQUEST['post'] ) || isset( $_REQUEST['post_ID'] ) ) {
+		$page_id = empty( $_REQUEST['post_ID'] ) ? $_REQUEST['post'] : $_REQUEST['post_ID'];
+	}
+
+	$options[] = array(
+		'id' => 'page_custom_post_type',
+		'title' => __( 'Select Post Type', 'philosophy' ),
+		'post_type' => 'page',
+		'context' => 'normal',
+		'priority' => 'default',
+		'sections' => array(
+			array(
+				'name' => 'page-section1',
+				// 'title' => __( 'Post Types', 'philosophy' ),
+				'icon' => 'fa fa-image',
+				'fields' => array(
+
+					array(
+						'id' => 'cpt_type',
+						'type' => 'select',
+						'title' => __( 'Select a custom post type', 'philosophy' ),
+						'options' => array(
+							'none' => 'None',
+							'book' => 'Book',
+							'chapter' => 'Chapter'
+						)
+					)
+
+				)
+			)
+		)
+	);
+
+	// 
+	$page_meta_info = get_post_meta ( $page_id, 'page_custom_post_type', true);
+
+	if( isset( $page_meta_info['cpt_type'] ) && $page_meta_info['cpt_type'] == 'book' ) {
+		$options[] = array(
+			'id' => 'page-custom_post_type_book',
+			'title' => __( 'Options for Book', 'philosophy' ),
+			'post_type' => 'page',
+			'context' => 'normal',
+			'priority' => 'default',
+			'sections' => array(
+				array(
+					'name' => 'page-section1',
+					// 'title' => __( 'Post Types', 'philosophy' ),
+					'icon' => 'fa fa-image',
+					'fields' => array(
+	
+						array(
+							'id' => 'option_book_text',
+							'type' => 'text',
+							'title' => __( 'Some Book Info', 'philosophy' ),
+						)
+	
+					)
+				)
+			)
+		);
+	}
+
+	if( isset( $page_meta_info['cpt_type'] ) && $page_meta_info['cpt_type'] == 'chapter' ) {
+		$options[] = array(
+			'id' => 'page-custom_post_type_chapter',
+			'title' => __( 'Options for Chapter', 'philosophy' ),
+			'post_type' => 'page',
+			'context' => 'normal',
+			'priority' => 'default',
+			'sections' => array(
+				array(
+					'name' => 'page-section1',
+					// 'title' => __( 'Post Types', 'philosophy' ),
+					'icon' => 'fa fa-image',
+					'fields' => array(
+
+						array(
+							'id' => 'option_chapter_text',
+							'type' => 'text',
+							'title' => __( 'Some Chapter Info', 'philosophy' ),
+						)
+
+					)
+				)
+			)
+		);
+	}
+
+	return $options;
+}
+
+add_filter( 'cs_metabox_options', 'philosophy_custom_post_types' );
+```
+
+![Display metabox upon condition](https://github.com/manzurahmed/WordPress-Common-Functions/blob/master/images/chapter-24/SelectPostType_All_Options.jpg)
