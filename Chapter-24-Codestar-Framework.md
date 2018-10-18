@@ -567,3 +567,14 @@ add_filter( 'cs_metabox_options', 'philosophy_custom_post_types' );
 ```
 
 ![Display metabox upon condition](https://github.com/manzurahmed/WordPress-Common-Functions/blob/master/images/chapter-24/SelectPostType_All_Options.jpg)
+
+## ২৪.১০ - কোডস্টার দিয়ে শর্টকোড এন্ট্রি দেয়ার ফর্ম বানানো 
+
+এই পর্বে কোডস্টার ফ্রেমওয়ার্ক দিয়ে শর্টকোড এর জন্য ভিজ্যুয়াল এডিটর বানানো যায়।
+
+প্রথমেই, কোডস্টার ফ্রেমওয়ার্ক এর একটি “ডিফাইন সুইচ” **CS_ACTIVE_SHORTCODE** সুইচকে true করে দিতে হবে। এটা পাওয়া যাবে inc ফোল্ডারের cs.php ফাইলে। এর নীচে থাকা philosophy_csf_metabox নামের ফাংশন কলব্যাকে নীচের লাইনটি যোগ করতে হবে।
+
+```php
+CSFramework_Shortcode_Manager::instance( array() );
+```
+
