@@ -13,6 +13,7 @@
 10. Language Transation POedit: https://poedit.net/
 11. Shortlinks by Pretty Links - Blair Williams
 12. Ad Inserter - AdSense plugin, WP Ads, Header Code - Igor Funa
+13. WP-Optimize: David Anderson, Ruhani Rabin, Team Updraft
 
 ### WordPress Plugins
 
