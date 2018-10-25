@@ -633,19 +633,19 @@ add_filter( 'cs_shortcode_options', 'philosophy_cs_google_map' );
 
 এই পর্বে ট্যাক্সোনমির জন্য কোডস্টার দিয়ে একটি মেটাবক্স বানানোর পদ্ধতি দেখানো হয়েছে। প্রথমে ট্যাক্সোনমির জন্য ডিফাইন boolen ভ্যালুকে true করে দিব।
 
-‌‌```php
+```php
 define( 'CS_ACTIVE_TAXONOMY',    true );
 ```
 
 এরপর add_action( "init", "philosophy_csf_metabox" ); হুকের কলব্যাক ফাংশনে ট্যাক্সোনমির কনফিগকে ইনিশিয়ালাইজ করতে হবে।
 
-‌‌‌```php
+```php
 CSFramework_Taxonomy::instance( array() );
 ```
 
 এবার **cs_taxonomy_options** নামের ফিল্টার হুক দিয়ে ট্যাক্সোনমির জন্য মেটাবক্স বানাতে হবে।
 
-‌‌‌```php
+```php
 // ২৪.১১ - কোডস্টার ফ্রেমওয়ার্ক দিয়ে কাস্টম ট্যাক্সোনমি/টার্মের জন্য মেটাবক্স বানানো
 function philosophy_language_featured_image( $options ) {
 
