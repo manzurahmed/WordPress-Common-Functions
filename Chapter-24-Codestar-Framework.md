@@ -572,9 +572,60 @@ add_filter( 'cs_metabox_options', 'philosophy_custom_post_types' );
 
 এই পর্বে কোডস্টার ফ্রেমওয়ার্ক দিয়ে শর্টকোড এর জন্য ভিজ্যুয়াল এডিটর বানানো যায়।
 
-প্রথমেই, কোডস্টার ফ্রেমওয়ার্ক এর একটি “ডিফাইন সুইচ” **CS_ACTIVE_SHORTCODE** সুইচকে true করে দিতে হবে। এটা পাওয়া যাবে inc ফোল্ডারের cs.php ফাইলে। এর নীচে থাকা philosophy_csf_metabox নামের ফাংশন কলব্যাকে নীচের লাইনটি যোগ করতে হবে।
+প্রথমেই, কোডস্টার ফ্রেমওয়ার্ক এর একটি “ডিফাইন সুইচ” **CS_ACTIVE_SHORTCODE** সুইচকে **true** করে দিতে হবে। এটা পাওয়া যাবে inc ফোল্ডারের cs.php ফাইলে। এর নীচে থাকা philosophy_csf_metabox নামের ফাংশন কলব্যাকে নীচের লাইনটি যোগ করতে হবে।
 
 ```php
 CSFramework_Shortcode_Manager::instance( array() );
+```
+
+### এখানে একটা সমস্যা হচ্ছে। এডিটরের টুলবার সর্টকোর্ডের ভিজুয়াল এডিটরের উপরে উঠে যাচ্ছে। এটার একটা ফিক্স দরকার।
+
+```php
+function philosophy_cs_google_map( $options ) {
+
+	$options      = array();
+
+	$options[]     = array(
+		'name'          => 'group_1',
+		'title'         => __( 'Group #1', 'philosophy' ),
+		'shortcodes'    => array(
+	  
+		  array(
+			'name'      => 'gmap',
+			'title'     => __( 'Google Map', 'philosophy' ),
+			'fields'    => array(
+			  array(
+				'id'    => 'place',
+				'type'  => 'text',
+				'title' => __( 'Place', 'philosophy' ),
+				'help'  => __( 'Enter place name.', 'philosophy' ),
+				'default' => 'Mogbazar, Dhaka'
+			  ),
+			  array(
+				'id'    => 'width',
+				'type'  => 'text',
+				'title' => __( 'Width', 'philosophy' ),
+				'default' => '100%'
+			  ),
+			  array(
+				'id'    => 'height',
+				'type'  => 'text',
+				'title' => __( 'Enter Height', 'philosophy' ),
+				'default' => 500
+			  ),
+			  array(
+				'id'    => 'zoom',
+				'type'  => 'text',
+				'title' => __( 'Enter Zoom value.', 'philosophy' ),
+				'default' => 14
+			  )
+			),
+		  ),
+		)
+	);
+
+	return $options;
+}
+add_filter( 'cs_shortcode_options', 'philosophy_cs_google_map' );
 ```
 
