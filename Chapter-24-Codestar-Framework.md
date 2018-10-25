@@ -671,6 +671,8 @@ function philosophy_language_featured_image( $options ) {
 add_filter( 'cs_taxonomy_options', 'philosophy_language_featured_image' );
 ```
 
+![Taxonomy metabox using CodeStar Framework](https://github.com/manzurahmed/WordPress-Common-Functions/blob/master/images/chapter-24/metabox-for-taxonomy.jpg)
+
 ট্যাক্সোনমির জন্য মেটাবক্স বানানোর জন্য কোডস্টারের নীচের কোড ব্যবহার করা হয়েছে:
 
 ```php
