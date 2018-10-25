@@ -702,16 +702,16 @@ add_filter( 'cs_taxonomy_options', 'philosophy_language_featured_image' );
 
 ```php
 <?php
-				// ২৪.১১ - কোডস্টার ফ্রেমওয়ার্ক দিয়ে কাস্টম ট্যাক্সোনমি/টার্মের জন্য মেটাবক্স বানানো
-				$philosophy_term = get_queried_object(); // returns array()
-				$philosophy_term_meta = get_term_meta( $philosophy_term->term_id, 'language_featured_image', true );
+// ২৪.১১ - কোডস্টার ফ্রেমওয়ার্ক দিয়ে কাস্টম ট্যাক্সোনমি/টার্মের জন্য মেটাবক্স বানানো
+$philosophy_term = get_queried_object(); // returns array()
+$philosophy_term_meta = get_term_meta( $philosophy_term->term_id, 'language_featured_image', true );
 
-				//var_dump($term_meta);
+//var_dump($term_meta);
 
-				if ( isset( $philosophy_term_meta['featured_image'] ) && $philosophy_term_meta['featured_image'] > 0 ) {
-					echo wp_get_attachment_image( $philosophy_term_meta['featured_image'], 'medium' );
-				}
-				?>
+if ( isset( $philosophy_term_meta['featured_image'] ) && $philosophy_term_meta['featured_image'] > 0 ) {
+	echo wp_get_attachment_image( $philosophy_term_meta['featured_image'], 'medium' );
+}
+?>
 ```
 
 কোন term পেজে কোন টার্মটা আসলে ইকো করা হচ্ছে, তা বের করার জন্য, get_queried_object() ফাংশনটা ব্যবহার করা হয়।
