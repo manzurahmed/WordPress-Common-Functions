@@ -14,6 +14,7 @@
 11. Shortlinks by Pretty Links - Blair Williams
 12. Ad Inserter - AdSense plugin, WP Ads, Header Code - Igor Funa
 13. WP-Optimize: David Anderson, Ruhani Rabin, Team Updraft
+14. URL Redirection: Simple 301 Redirects - https://wordpress.org/plugins/simple-301-redirects/
 
 ### WordPress Plugins
 
