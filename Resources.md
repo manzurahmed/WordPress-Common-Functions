@@ -35,6 +35,7 @@
 12. Custom Post Type UI by Webdev Studios: https://wordpress.org/plugins/custom-post-type-ui/
 13. Shortcake (Shortcode UI Builder): https://wordpress.org/plugins/shortcode-ui/
 14. Easy Table of Content - Steven A. Zahm
+15. Better Search Replace: by Delicious Brains - https://wordpress.org/plugins/better-search-replace/
 
 ### Other Resources
 
