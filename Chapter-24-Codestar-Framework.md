@@ -806,3 +806,104 @@ add_filter( 'cs_framework_options', 'philosophy_theme_options' );
 ```php
 <?php echo esc_url( cs_get_option('facebook_link') ); ?>
 ```
+
+
+## ২৪.১৩ - থিমের অ্যাডমিন প্যানেলের মেনু পজিশন এবং সেটিংস নিয়ে আরোও আলোচনা
+
+থিম অপশন অ্যাডমিন মেনুতে দেখায়। যদি অন্য কোন মেনু আইটেমের অধীনে দেখাতে চাই, তবে, menu_type কে "submenu" করে দিতে হবে। আর, যে মেনুর আন্ডারে আনতে চাই সেই মেনুর পেজের php ফাইলকে "menu_parent" হিসাবে দিতে হবে।
+
+যেমন: Appearance মেনু আইটেমের আন্ডারে দেখাতে হলে themes.php, বা, Tools মেনুর আন্ডারে দেখাতে হলে tools.php ব্যবহার করতে হবে।
+
+#### বিশেষ দ্রষ্টব্য:
+
+1. এই কোর্সে যেভাবে দেখানো হয়েছে, তাতে Appearance মেনুর আন্ডারে তৈরী করা থিম অপশন দেখা যাচ্ছিল। কিন্তু, আমার কোডে এই মেনু পজিশনিংটা কাজ করছিল না। কারণ, কোর্সে Codestar Framework এর একটা মডিফাইড ভার্সন ব্যবহার করা হচ্ছি।
+2. ThemeForest এর নিয়মানুযায়ী, যদি থিমের অপশন প্যানেলের একটা পেজ ব্যবহার করা হয়, তবে তা Appearance মেনুর মধ্যে পজিশন করতে হবে।
+
+এর আগের পর্বে init হুকের ভিতরে "CSFramework::instance( $settings, array() );" অর্থাৎ instance ব্যবহার করে থিম অপশন আনা হয়েছিল। কিন্তু, এই পর্বে instance ব্যবহার না করে অন্য ভাবে থিম অপশন আনা হয়েছে।
+
+```php
+function philosophy_theme_option_init() {
+	
+	//$settings = array();
+
+	$settings[] = array(
+		'menu_title' => __( 'Philosophy Options', 'philosophy' ),
+		'menu_type' => 'submenu',
+		'menu_parent' => 'themes.php',
+		'menu_slug' => 'philosophy_option_panel',
+		'framework_title' => __( 'Philosophy Options', 'philosophy' ),
+		'menu_icon' => 'dashicons dashicons-admin-settings',
+		'menu_position' => 15,
+		'ajax_save' => false,
+		'show_reset_all' => true
+	);
+
+	$options = philosophy_theme_options();
+
+	//CSFramework::instance( $settings, array() );
+	new CSFramework( $settings, $options );
+}
+add_action( "init", "philosophy_theme_option_init" );
+
+//function philosophy_theme_options( $options ) {
+function philosophy_theme_options() {
+
+	$options = array(); // remove old options
+
+	$options[] = array(
+		'name' => 'footer_options',
+		'title' => __( 'Footer Options', 'philosophy' ),
+		'icon' => 'dashicons dashicons-admin-settings',
+		'fields' => array(
+			array(
+				'id' => 'footer_tag',
+				'type' => 'switcher',
+				'title' => __( 'Tags Area Visible?', 'philosophy' ),
+				'default' => '0'
+			)
+		)
+	);
+
+	$options[] = array(
+		'name' => 'social_links_options',
+		'title' => __( 'Social Links Options', 'philosophy' ),
+		'icon' => 'fa fa-facebook',
+		'fields' => array(
+			array(
+				'id' => 'facebook_link',
+				'type' => 'text',
+				'title' => __( 'Facebook Link', 'philosophy' ),
+			),
+			array(
+				'id' => 'twitter_link',
+				'type' => 'text',
+				'title' => __( 'Twitter Link', 'philosophy' ),
+			),
+			array(
+				'id' => 'googleplus_link',
+				'type' => 'text',
+				'title' => __( 'Google+ Link', 'philosophy' ),
+			),
+			array(
+				'id' => 'youtube_link',
+				'type' => 'text',
+				'title' => __( 'YouTube Link', 'philosophy' ),
+			)
+			,
+			array(
+				'id' => 'pinterest_link',
+				'type' => 'text',
+				'title' => __( 'Pinterest Link', 'philosophy' ),
+			)
+		)
+	);
+
+	return $options;
+}
+```
+
+যখন থিমের অপশন প্যানেল তৈরীর প্রয়োজন পড়বে, তখন instance এর পরিবর্তে নিচের মত করে Codestar framework কে ব্যবহার করা উচিত।
+
+```php
+new CSFramework( $settings, $options );
+```
