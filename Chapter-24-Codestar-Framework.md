@@ -718,3 +718,91 @@ if ( isset( $philosophy_term_meta['featured_image'] ) && $philosophy_term_meta['
 
 কোন term পেজে কোন টার্মটা আসলে ইকো করা হচ্ছে, তা বের করার জন্য, get_queried_object() ফাংশনটা ব্যবহার করা হয়।
 
+## ২৪.১২ - কোডস্টার ফ্রেমওয়ার্ক দিয়ে থিমের অ্যাডমিন প্যানেল বানানো
+
+প্রথমে থিমের অপশনের জন্য একটা মেনু আইটেম যোগ করতে হবে। init হুকের মাধ্যমে মেনু যোগ করা হচ্ছে।
+
+```php
+function philosophy_theme_option_init() {
+	
+	$settings = array(
+		'menu_title' => __( 'Philosophy Options', 'philosophy' ),
+		'menu_type' => 'menu',
+		'menu_slug' => 'philosophy_option_panel',
+		'framework_title' => __( 'Philosophy Options', 'philosophy' ),
+		'menu_icon' => 'dashicons dashicons-admin-settings',
+		'menu_position' => 20,
+		'ajax_save' => false,
+		'show_reset_all' => false
+	);
+
+	CSFramework::instance( $settings, array() );
+}
+add_action( "init", "philosophy_theme_option_init" );
+```
+
+এবার add_filter ব্যবহার করে মেনুর মধ্যে অপশন প্যানেল বানাতে হবে।
+
+‌‌‌```php
+function philosophy_theme_options( $options ) {
+
+	$options = array(); // remove old options
+
+	$options[] = array(
+		'name' => 'footer_options',
+		'title' => __( 'Footer Options', 'philosophy' ),
+		'icon' => 'dashicons dashicons-admin-settings',
+		'fields' => array(
+			array(
+				'id' => 'footer_tag',
+				'type' => 'switcher',
+				'title' => __( 'Tags Area Visible?', 'philosophy' ),
+				'default' => '0'
+			)
+		)
+	);
+
+	$options[] = array(
+		'name' => 'social_links_options',
+		'title' => __( 'Social Links Options', 'philosophy' ),
+		'icon' => 'fa fa-facebook',
+		'fields' => array(
+			array(
+				'id' => 'facebook_link',
+				'type' => 'text',
+				'title' => __( 'Facebook Link', 'philosophy' ),
+			),
+			array(
+				'id' => 'twitter_link',
+				'type' => 'text',
+				'title' => __( 'Twitter Link', 'philosophy' ),
+			),
+			array(
+				'id' => 'googleplus_link',
+				'type' => 'text',
+				'title' => __( 'Google+ Link', 'philosophy' ),
+			),
+			array(
+				'id' => 'youtube_link',
+				'type' => 'text',
+				'title' => __( 'YouTube Link', 'philosophy' ),
+			)
+			,
+			array(
+				'id' => 'pinterest_link',
+				'type' => 'text',
+				'title' => __( 'Pinterest Link', 'philosophy' ),
+			)
+		)
+	);
+
+	return $options;
+}
+add_filter( 'cs_framework_options', 'philosophy_theme_options' );
+```
+
+এখন, ফ্রন্টএন্ডে ফেসবুকের url দেখাতে হলে, নিচের কোড লিখতে হবে:
+
+```php
+<?php echo esc_url( cs_get_option('facebook_link') ); ?>
+```
