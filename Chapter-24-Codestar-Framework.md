@@ -743,7 +743,7 @@ add_action( "init", "philosophy_theme_option_init" );
 
 এবার add_filter ব্যবহার করে মেনুর মধ্যে অপশন প্যানেল বানাতে হবে।
 
-‌‌‌```php
+```php
 function philosophy_theme_options( $options ) {
 
 	$options = array(); // remove old options
