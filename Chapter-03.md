@@ -1,7 +1,24 @@
 GitHub Markdown syntax: https://help.github.com/articles/basic-writing-and-formatting-syntax/
 
-# WordPress-Common-Functions
-This is a repository of WordPress functions that I encountered during WordPress Theme and Plugin development tutorials
+# এই ক্লাশে যে সব ওয়ার্ডপ্রেস ফাংশন শিখানো হয়েছে
+- add_theme_support( 'custom-header' );
+- current_theme_supports( 'custom-header')
+- the_custom_logo()
+- comments_open()
+- comments_template()
+- get_template_part()
+- next_post_link()
+- previous_post_link()
+- register_sidebar(
+- is_active_sidebar( 'sidebar-name' )
+- dynamic_sidebar( 'sidebar-name' )
+- post_password_required()
+- get_the_password_form()
+- register_nav_menu( 'topmenu', __('Top Menu', 'alpha') )
+- wp_nav_menu()
+- wp_enqueue_script( 'featherlight', get_template_directory_uri().'/assets/js/featherlight.min.js', array('jquery'), '1.7.13', true )
+- is_front_page()
+
 
 # Class 3.12 সিংগেল পোস্ট ভিউতে কমেন্ট ফর্ম দেখানো
 কোন পোস্টের কমেন্ট এনাবল/ডিজাবল স্টেট ভ্যালু চেক করার পর, কমেন্ট টেমপ্লেট লোড করা আবশ্যক।
