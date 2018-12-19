@@ -1,5 +1,12 @@
-# Class 4.2
-## কাস্টম ফিল্ডের সাথে পরিচয়
+# Class 4.2 কাস্টম ফিল্ডের সাথে পরিচয়
+
+## এই পর্বে সে সকল ফাংশনের সাথে পরিচয় হয়েছে
+
+- get_post_meta( get_the_ID(), "placeholder", true );
+- wp_localize_script( '**main-jquery**', 'datedata', array( "year" => $launcher_year, "month" => $launcher_month,  "day" => $launcher_day ) );
+- echo get_page_template();
+- echo basename( get_page_template() );
+
 
 ```
 get_post_meta( int $post_id, string $key = '', bool $single = false )
