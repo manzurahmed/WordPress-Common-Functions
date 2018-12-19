@@ -1,6 +1,22 @@
-# Chapter 5
+# Chapter 5 ৫.১ সিঙ্গেল পোস্টের পেজিনেশন
 
-## ৫.১ সিঙ্গেল পোস্টের পেজিনেশন
+## এই ক্লাশে যে সব ফাংশনগুলোর সাথে পরিচয় হয়েছে
+
+- <!--nextpage-->
+- wp_link_pages();
+- add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
+- get_template_part("post-formats/content", get_post_format());
+- get_avatar( get_the_author_meta( "ID" ), $size = 96, $default = '', $alt = '', $args = null )
+- echo get_the_author_meta( "display_name" );
+- body_class( array('my-custom-class', 'second-class', 'third-class') );
+- single_cat_title()
+- single_tag_title()
+- get_query_var( 'year' )
+...Retrieve public query variable in the WP_Query class of the global $wp_query object. 
+- esc_html( $text )
+- the_author_posts_link()
+- echo get_search_form();
+
 
 একটা সিঙ্গেল **বড় পোস্ট** কে একাধিক পেজে বিভক্ত করতে পোস্টের মধ্যে Text মুড এ গিয়ে যেখানে যেখানে পেজ তৈরী করা দরকার, সেখানে সেখানে
 ```html
