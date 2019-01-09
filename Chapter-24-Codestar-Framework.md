@@ -907,3 +907,5 @@ function philosophy_theme_options() {
 ```php
 new CSFramework( $settings, $options );
 ```
+
+# এই পর্বের বাদবাকি ভিডিওগুলো পড়ে দেখে নিতে হবে।
