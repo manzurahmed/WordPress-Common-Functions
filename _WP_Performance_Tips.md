@@ -36,3 +36,39 @@ Let’s say limit to keep max two revisions
 define('WP_POST_REVISIONS', 2);
 ```
 Note: this must be **above ABSPATH** line else it won’t work.
+
+### Hide WordPress Version
+
+This doesn’t help in performance but more to mitigate information leakage vulnerability. By default, WordPress adds meta name generator with the version details which is visible in source code and HTTP header.
+
+To remove the WP version, add below code.
+```
+remove_action( 'wp_head', 'wp_generator' ) ;
+```
+
+### Disable XML-RPC
+
+Do you have a requirement to use WordPress API (XML-RPC) to publish/edit/delete a post, edit/list comments, upload file? Also having XML-RPC enabled and not hardened properly may lead to DDoS & brute force attacks.
+
+If you don’t need then disable it by adding below.
+```
+add_filter('xmlrpc_enabled', '__return_false');
+```
+
+### Disable Emoticons
+
+Remove extra code related to emojis from WordPress which was added recently to support emoticons in an older browser.
+```
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+remove_action( 'admin_print_styles', 'print_emoji_styles' );
+```
+
+### Remove RSD Links
+
+RSD (Really Simple Discovery) is needed if you intend to use XML-RPC client, pingback, etc. However, if you don’t need pingback or remote client to manage post then get rid of this unnecessary header by adding the following code.
+```
+remove_action( 'wp_head', 'rsd_link' ) ;
+```
+
