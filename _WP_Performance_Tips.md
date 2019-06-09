@@ -15,6 +15,20 @@ function wpdocs_dequeue_dashicon() {
 }
 add_action( 'wp_enqueue_scripts', 'wpdocs_dequeue_dashicon' );
 ```
+
+## Disable Auto-Save
+
+```
+define( 'AUTOSAVE_INTERVAL', 60*60*60*24*365 ); // Set autosave interval to 1x per year
+```
+
+## Empty Trash Now
+```
+define( 'EMPTY_TRASH_DAYS',  0 ); // Empty trash now: Zero days
+```
+
+define( 'WP_POST_REVISIONS', false ); // Do not save andy revisions
+
 ## Disable or Limit Post Revisions
 
 Post revisions in WordPress are not new and helpful to restore the post if browser crash or lose the network. But ask yourself, how many times did it happen?
