@@ -2,7 +2,7 @@
 
 ## Get current user and check if User is logged in
 
-```
+```php
 // https://codex.wordpress.org/wp_get_current_user
 $current_user = wp_get_current_user();
 
