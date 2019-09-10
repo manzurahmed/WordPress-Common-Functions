@@ -52,3 +52,6 @@
 ### VisualStudio Code, Sublime Text, Atom Snippet Generator
 
 https://snippet-generator.app/?description=&tabtrigger=&snippet=&mode=vscode
+
+### Google Services
+1. Google Map: https://console.cloud.google.com
