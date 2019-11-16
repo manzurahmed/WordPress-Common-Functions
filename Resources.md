@@ -38,6 +38,7 @@
 13. Shortcake (Shortcode UI Builder): https://wordpress.org/plugins/shortcode-ui/
 14. Easy Table of Content - Steven A. Zahm
 15. Better Search Replace: by Delicious Brains - https://wordpress.org/plugins/better-search-replace/
+16. Easy Scroll Progress Indicator: https://wordpress.org/plugins/easy-scroll-progress-indicator/
 
 ### Other Resources
 
